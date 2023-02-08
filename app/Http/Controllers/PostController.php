@@ -4,16 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Clockwork\Storage\Search;
 
 class PostController extends Controller
 {
+
     public function index()
+
     {
+
         return view('posts', [
             "title" => "All Posts",
             "active" => 'posts',
-            // "posts" => Post::all()
-            "posts" => Post::latest()->get()
+            "posts" => Post::latest()->filter(request(['search', 'category', 'author']))->get()
         ]);
     }
 
