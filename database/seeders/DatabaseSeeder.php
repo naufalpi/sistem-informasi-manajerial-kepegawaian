@@ -27,7 +27,6 @@ class DatabaseSeeder extends Seeder
 
         User::factory(3)->create();
 
-        Post::factory(20)->create();
 
         Category::create([
             'name' => 'Web Programming',
@@ -38,7 +37,13 @@ class DatabaseSeeder extends Seeder
             'name' => 'Personal',
             'slug' => 'personal'
         ]);
+        
+        Category::create([
+            'name' => 'Web Design',
+            'slug' => 'web-design'
+        ]);
 
+        Post::factory(20)->create();
         // Post::create([
         //     'title' => 'Judul Pertama',
         //     'slug' => 'judul-pertama',
