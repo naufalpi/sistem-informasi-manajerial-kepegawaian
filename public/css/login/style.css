@@ -1,0 +1,40 @@
+.card {
+    margin-bottom: 30px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0px 0 30px rgba(1, 41, 112, 0.1);
+  }
+  
+a {
+    color: #4154f1;
+    text-decoration: none;
+}
+  
+a:hover {
+    color: #717ff5;
+    text-decoration: none;
+}
+  
+
+.logo {
+    line-height: 1;
+}
+  
+@media (min-width: 1200px) {
+    .logo {
+      width: 280px;
+    }
+}
+  
+.logo img {
+    max-height: 26px;
+    margin-right: 6px;
+}
+  
+.logo span {
+    font-size: 26px;
+    font-weight: 700;
+    color: #012970;
+    font-family: "Nunito", sans-serif;
+}
+  

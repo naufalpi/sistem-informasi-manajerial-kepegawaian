@@ -15,7 +15,7 @@
    
 
     <!-- Favicons -->
-    <link href="/image/favicon.png" rel="icon">
+    <link href="/image/logo.png" rel="icon">
     <link href="/image/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
