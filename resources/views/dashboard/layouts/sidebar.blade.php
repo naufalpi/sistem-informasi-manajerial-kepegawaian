@@ -75,5 +75,18 @@
       </li>
     </ul>
 
+    @can('admin')
+    <ul class="sidebar-nav " id="sidebar-nav">
+      <li class="nav-heading">Administrator</li>
+
+      <li class="nav-item">
+        <a class="nav-link {{ Request::is('dashboard/categories*') ? 'active' : '' }}" href="/dashboard/categories">
+            <i class="bi bi-grid"></i>
+            Categories
+        </a>
+      </li>
+    </ul>
+    @endcan
+
   </aside>
   <!-- End Sidebar-->
