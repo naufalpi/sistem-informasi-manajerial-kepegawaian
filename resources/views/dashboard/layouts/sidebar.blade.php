@@ -34,43 +34,52 @@
             My Post
         </a>
       </li>
-
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-            <i class="bi bi-person-lines-fill"></i><span>Kepegawaian</span><i class="bi bi-chevron-down ms-auto"></i>
+        <a class="nav-link {{ Request::is('dashboard/reports*') ? 'active' : '' }}" href="/dashboard/reports">
+            <i class="bi bi-grid"></i>
+            Kelola Laporan Kerja
         </a>
-        <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="#">
-              <i class="bi bi-circle"></i><span>Data Pegawai</span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <i class="bi bi-circle"></i><span>Laporan Pegawai</span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <i class="bi bi-circle"></i><span>Presensi Pegawai</span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <i class="bi bi-circle"></i><span>Cuti Pegawai</span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <i class="bi bi-circle"></i><span>Gaji Pegawai</span>
-            </a>
-          </li>
-        </ul>
-      </li><!-- End Components Nav -->
+      </li>
       <li class="nav-item">
-        <a class="nav-link  collapsed" href="#">
-          <i class="bi bi-question-circle"></i>
-          <span>F.A.Q</span>
+        <a class="nav-link {{ Request::is('dashboard/') ? 'active' : '' }}" href="/dashboard/">
+            <i class="bi bi-grid"></i>
+            Ajukan Cuti
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {{ Request::is('dashboard/') ? 'active' : '' }}" href="/dashboard/reports">
+            <i class="bi bi-grid"></i>
+            Kelola Presensi
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {{ Request::is('dashboard/') ? 'active' : '' }}" href="/dashboard/">
+            <i class="bi bi-grid"></i>
+            Profil Pengguna
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {{ Request::is('dashboard/') ? 'active' : '' }}" href="/dashboard/">
+            <i class="bi bi-grid"></i>
+            Kelola Data Pegawai
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {{ Request::is('dashboard/') ? 'active' : '' }}" href="/dashboard/">
+            <i class="bi bi-grid"></i>
+            Kelola Mutasi
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {{ Request::is('dashboard/') ? 'active' : '' }}" href="/dashboard/">
+            <i class="bi bi-grid"></i>
+            Kelola Kepensiunan
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {{ Request::is('dashboard/') ? 'active' : '' }}" href="/dashboard/">
+            <i class="bi bi-grid"></i>
+            Kelola Cuti Pegawai
         </a>
       </li>
     </ul>

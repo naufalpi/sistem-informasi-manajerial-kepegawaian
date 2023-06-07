@@ -15,8 +15,15 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('jabatan_id');
+            $table->foreignId('pendidikan_id');
             $table->string('name');
             $table->string('username')->unique();
+            $table->string('nrp')->unique();
+            $table->string('tpt_lahir');
+            $table->date('tgl_lahir');
+            $table->string('alamat');
+            $table->string('foto')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

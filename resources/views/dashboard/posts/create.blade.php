@@ -20,7 +20,7 @@
         </div>
         <div class="mb-3">
           <label for="slug" class="form-label">Slug</label>
-          <input type="text" class="form-control @error('slug') is-invalid @enderror" id="slug" name="slug" required value="{{ old('slug') }}">
+          <input type="text" class="form-control @error('slug') is-invalid @enderror" id="slug" name="slug" required value="{{ old('slug') }}" disabled readonly>
           @error('slug')
             <div class="invalid-feedback">
               {{ $message }}

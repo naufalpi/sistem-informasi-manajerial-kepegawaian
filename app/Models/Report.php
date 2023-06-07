@@ -3,31 +3,36 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\Sluggable;
 
-class Category extends Model
+class Report extends Model
 {
     use HasFactory, Sluggable;
 
     protected $guarded = ['id'];
 
-    public function posts()
+    protected $with = ['user'];
+    
+
+    public function user()
     {
-        return $this->hasMany(Post::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function getRouteKeyName()
     {
         return 'slug';
     }
-
+    
     public function sluggable(): array
     {
         return [
             'slug' => [
-                'source' => 'name'
+                'source' => 'kegiatan'
             ]
         ];
     }
+
+    
 }

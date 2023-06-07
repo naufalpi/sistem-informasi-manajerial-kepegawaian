@@ -8,6 +8,8 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\DashboardPostController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,8 +23,8 @@ use App\Http\Controllers\DashboardPostController;
 */
 
 Route::get('/', function () {
-    return view('home', [
-        "title" => "Home"
+    return view('login.index', [
+        "title" => "Login"
     ]);
 });
 
@@ -66,5 +68,10 @@ Route::get('/dashboard', function() {
 Route::get('/dashboard/posts/checkSlug', [DashboardPostController::class, 'checkSlug'])->middleware('auth');
 Route::resource('/dashboard/posts', DashboardPostController::class)->middleware('auth');
 
+Route::get('/dashboard/categories/checkSlug', [AdminCategoryController::class, 'checkSlug'])->middleware('admin');
 Route::resource('/dashboard/categories', AdminCategoryController::class)->except('show')->middleware('admin');
+
+Route::resource('/dashboard/reports', ReportController::class)->middleware('auth');
+
+Route::resource('/dashboard/profiles', UserController::class)->middleware('auth');
 

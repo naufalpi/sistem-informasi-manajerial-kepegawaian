@@ -49,4 +49,19 @@ class User extends Authenticatable
     {
         return $this->hasMany(Post::class);
     }
+
+    public function reports()
+    {
+        return $this->hasMany(Report::class);
+    }
+
+    public function jabatan()
+    {
+        return $this->belongsTo(Jabatan::class);
+    }
+
+    public function pendidikan()
+    {
+        return $this->belongsTo(Pendidikan::class);
+    }
 }
