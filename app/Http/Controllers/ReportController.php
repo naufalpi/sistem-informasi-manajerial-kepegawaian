@@ -44,10 +44,9 @@ class ReportController extends Controller
         
         $validatedData = $request->validate([
             'kegiatan' => 'required|max:255',
-            'slug' => 'required|unique:posts',
+            'slug' => 'required|unique:reports',
             'tanggal' => 'required',
-            'file' => ' ',
-            'keterangan' => 'required',
+            'keterangan' => 'required'
         ]);
 
 

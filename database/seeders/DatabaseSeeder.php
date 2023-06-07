@@ -116,8 +116,7 @@ class DatabaseSeeder extends Seeder
             'slug' => 'web-design'
         ]);
 
-        Post::factory(20)->create();
-
+        
         Report::factory(15)->create();
 
     }

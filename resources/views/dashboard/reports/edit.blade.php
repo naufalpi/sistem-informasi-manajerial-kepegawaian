@@ -3,15 +3,16 @@
 @section('container')
 
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">Buat Laporam Baru</h1>
+    <h1 class="h2">Edit Laporan</h1>
 </div>
 
 <div class="col-lg-8">
-    <form method="post" action="/dashboard/reports" class="mb-5" enctype="multipart/form-data">
+    <form method="post" action="/dashboard/reports/{{ $report->slug }}" class="mb-5" enctype="multipart/form-data">
+        @method('put')
         @csrf
         <div class="mb-3">
           <label for="kegiatan" class="form-label">Kegiatan</label>
-          <input type="text" class="form-control  @error('kegiatan') is-invalid @enderror" id="kegiatan" name="kegiatan" required autofocus value="{{ old('kegiatan') }}">
+          <input type="text" class="form-control  @error('kegiatan') is-invalid @enderror" id="kegiatan" name="kegiatan" required autofocus value="{{ old('kegiatan', $report->kegiatan) }}">
           @error('kegiatan')
             <div class="invalid-feedback">
               {{ $message }}
@@ -20,7 +21,7 @@
         </div>
         <div class="mb-3">
           <label for="slug" class="form-label">Slug</label>
-          <input type="text" class="form-control @error('slug') is-invalid @enderror" id="slug" name="slug" required value="{{ old('slug') }}">
+          <input type="text" class="form-control @error('slug') is-invalid @enderror" id="slug" name="slug" required value="{{ old('slug', $report->slug) }}">
           @error('slug')
             <div class="invalid-feedback">
               {{ $message }}
@@ -44,8 +45,7 @@
               {{ $message }}
             </div>
           @enderror
-        </div>
-        <div class="mb-3">
+         <div class="mb-3">
           <label for="keterangan" class="form-label">Keterangan</label>
           @error('keterangan')
             <p class="text-danger">{{ $message }}</p>
@@ -53,10 +53,9 @@
           <input id="keterangan" type="hidden" name="keterangan" value="{{ old('keterangan') }}">
           <trix-editor input="keterangan"></trix-editor>
         </div>
-        <button type="submit" class="btn btn-primary">Buat Laporan</button>
+        <button type="submit" class="btn btn-primary">Update Laporan</button>
     </form>
 </div>
-
 <script>
   const kegiatan = document.querySelector('#kegiatan');
   const slug = document.querySelector('#slug');
@@ -80,6 +79,5 @@
   //     imgPreview.src = oFREvent.target.result;
   //   }
   // }
-  
 </script>
 @endsection

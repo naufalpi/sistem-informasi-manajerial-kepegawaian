@@ -21,8 +21,7 @@ class ReportFactory extends Factory
             'slug' => fake()->slug(),
             'tanggal' => fake()->date(),
             'keterangan' => fake()->paragraph(mt_rand(3,7)),
-            'user_id' => mt_rand(1,3),
-            'file' => fake()->fileExtension()
+            'user_id' => mt_rand(1,3)
         ];
     }
 }

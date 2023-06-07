@@ -3,12 +3,11 @@
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\PostController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\AdminCategoryController;
-use App\Http\Controllers\DashboardPostController;
-use App\Http\Controllers\ReportController;
+use App\Http\Controllers\DashboardReportController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -41,14 +40,14 @@ Route::get('/account', function () {
     ]);
 });
 
-Route::get('/posts', [PostController::class, 'index']);
-// halaman single post
-Route::get('posts/{post:slug}', [PostController::class, 'show']);
+Route::get('/reports', [ReportController::class, 'index']);
+// halaman single report
+Route::get('reports/{report:slug}', [ReportController::class, 'show']);
 
 
 Route::get('/categories', function(){
     return view('categories', [
-        'title' => 'Post Categories',
+        'title' => 'Report Categories',
         'categories' => Category::all()
     ]);
 });
@@ -65,13 +64,11 @@ Route::get('/dashboard', function() {
 })->middleware('auth');
 
 
-Route::get('/dashboard/posts/checkSlug', [DashboardPostController::class, 'checkSlug'])->middleware('auth');
-Route::resource('/dashboard/posts', DashboardPostController::class)->middleware('auth');
+Route::get('/dashboard/reports/checkSlug', [DashboardReportController::class, 'checkSlug'])->middleware('auth');
+Route::resource('/dashboard/reports', DashboardReportController::class)->middleware('auth');
 
 Route::get('/dashboard/categories/checkSlug', [AdminCategoryController::class, 'checkSlug'])->middleware('admin');
 Route::resource('/dashboard/categories', AdminCategoryController::class)->except('show')->middleware('admin');
-
-Route::resource('/dashboard/reports', ReportController::class)->middleware('auth');
 
 Route::resource('/dashboard/profiles', UserController::class)->middleware('auth');
 

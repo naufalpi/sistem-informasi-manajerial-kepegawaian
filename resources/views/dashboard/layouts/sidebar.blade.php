@@ -8,7 +8,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ Request::is('dashboard/posts*') ? 'active' : '' }}" href="/dashboard/posts">
+                <a class="nav-link {{ Request::is('dashboard/reports*') ? 'active' : '' }}" href="/dashboard/reports">
                     <span data-feather="file-text" class="align-text-bottom"></span>
                     My Posts
                 </a>
@@ -26,12 +26,6 @@
         <a class="nav-link {{ Request::is('dashboard') ? 'active' : '' }}" aria-current="page" href="/dashboard">
             <i class="bi bi-grid"></i>
             Dashboard
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link {{ Request::is('dashboard/posts*') ? 'active' : '' }}" href="/dashboard/posts">
-            <i class="bi bi-grid"></i>
-            My Post
         </a>
       </li>
       <li class="nav-item">
