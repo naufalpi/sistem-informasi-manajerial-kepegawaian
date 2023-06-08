@@ -30,49 +30,49 @@
       </li>
       <li class="nav-item">
         <a class="nav-link {{ Request::is('dashboard/reports*') ? 'active' : '' }}" href="/dashboard/reports">
-            <i class="bi bi-grid"></i>
+            <i class="bi bi-journal-text"></i>
             Kelola Laporan Kerja
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link {{ Request::is('dashboard/') ? 'active' : '' }}" href="/dashboard/">
-            <i class="bi bi-grid"></i>
-            Ajukan Cuti
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link {{ Request::is('dashboard/') ? 'active' : '' }}" href="/dashboard/reports">
-            <i class="bi bi-grid"></i>
-            Kelola Presensi
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link {{ Request::is('dashboard/') ? 'active' : '' }}" href="/dashboard/">
-            <i class="bi bi-grid"></i>
-            Profil Pengguna
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link {{ Request::is('dashboard/') ? 'active' : '' }}" href="/dashboard/">
-            <i class="bi bi-grid"></i>
+        <a class="nav-link {{ Request::is('dashboard/pegawai*') ? 'active' : '' }}" href="/dashboard/pegawai">
+            <i class="bi bi-people"></i>
             Kelola Data Pegawai
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link {{ Request::is('dashboard/') ? 'active' : '' }}" href="/dashboard/">
-            <i class="bi bi-grid"></i>
+            <i class="bi bi-calendar-plus"></i>
+            Ajukan Cuti
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {{ Request::is('dashboard/') ? 'active' : '' }}" href="/dashboard/reports">
+            <i class="bi bi-journal-check"></i>
+            Kelola Presensi
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {{ Request::is('dashboard/') ? 'active' : '' }}" href="/dashboard/">
+            <i class="bi bi-person"></i>
+            Profil Pengguna
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {{ Request::is('dashboard/') ? 'active' : '' }}" href="/dashboard/">
+            <i class="bi bi-person-badge"></i>
             Kelola Mutasi
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link {{ Request::is('dashboard/') ? 'active' : '' }}" href="/dashboard/">
-            <i class="bi bi-grid"></i>
+            <i class="bi bi-person-badge"></i>
             Kelola Kepensiunan
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link {{ Request::is('dashboard/') ? 'active' : '' }}" href="/dashboard/">
-            <i class="bi bi-grid"></i>
+            <i class="bi bi-calendar-check"></i>
             Kelola Cuti Pegawai
         </a>
       </li>

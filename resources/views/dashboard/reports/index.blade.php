@@ -6,7 +6,7 @@
   <div class="row">
     <div class="col-lg-8">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Laporan saya</h1>
+        <h1 class="h2">Laporan Kerja</h1>
       </div>
 
       @if(session()->has('success'))
@@ -45,6 +45,7 @@
                     <form action="/dashboard/reports/{{ $report->slug }}" method="post" class="d-inline">
                       @method('delete')
                       @csrf
+                      {{-- <button id="btnConfirm" class="badge bg-danger border-0" onclick="return confirm('Are you sure?')"><i class="bi bi-x-circle"></i></button> --}}
                       <button class="badge bg-danger border-0" onclick="return confirm('Are you sure?')"><i class="bi bi-x-circle"></i></button>
                     </form>
                   </td>

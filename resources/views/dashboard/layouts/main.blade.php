@@ -87,5 +87,8 @@
     <script src="/js/dashboard/tinymce/tinymce.min.js"></script>
     <script src="/js/dashboard/php-email-form/validate.js"></script>
     <script src="/js/dashboard/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+   
   </body>
 </html>

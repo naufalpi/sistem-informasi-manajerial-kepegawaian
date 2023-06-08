@@ -2,38 +2,129 @@
 
 @section('container')
 
-{{-- <div class="row justify-content-center">
-    <div class="col-md-4">
 
-       
+<section class="section register min-vh-100 d-flex flex-column align-items-center">
+    <div class="container mt-3">
+        <h1 class="text-center pb-0 display-4" style="color: white; font-weight: bold; text-shadow: 2px 2px 4px #000">SELAMAT DATANG DI SISTEM INFORMASI MANAJERIAL KEPEGAWAIAN KANTOR DESA WANAKARSA</h1>
+    </div>
+
+    <div class="container mt-5">
+      <div class="row justify-content-center">
+        <div class="mt-5 col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+            @if(session()->has('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+
+            @if(session()->has('loginError'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{ session('loginError') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+
         
-        <main class="form-signin w-100 m-auto">
-            <h1 class="h3 mb-3 fw-normal text-center">Please login</h1>
-            <form action="/login" method="post">
-                @csrf
-                <div class="form-floating">
-                    <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="name@example.com" autofocus required value="{{ old('email') }}">
-                    <label for="email">Email address</label>
-                    @error('email')
+            {{-- <div class="d-flex justify-content-center py-4">
+                <a href="/" class="logo d-flex align-items-center w-auto">
+                  <img src="/image/logo.png" alt="">
+                </a>
+            </div> --}}
+            <div class="card mb-3" style="opacity: 0.9;">
+                
+
+                <div class="card-body">
+                    <div class="pt-4 pb-2">
+                        <h5 class="card-title text-center pb-0 fs-4">Login ke Akun Anda!</h5>
+                        <p class="text-center small">Silakan masukan email dan password untuk login</p>
+                    </div>
+
+                    <form class="row g-3 needs-validation" action="/login" method="post">
+                        @csrf
+                        <div class="col-12">
+                        <label for="email" class="form-label">Email</label>
+                        <div class="input-group has-validation">
+                            <input type="email" class="form-control" name="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="email@example.com" autofocus required value="{{ old('email') }}">
+                            @error('email')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                        </div>
+                        </div>
+
+                        <div class="col-12">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" name="password" class="form-control" id="password" placeholder="password" required>
+                        </div>
+
+                        <div class="col-12">
+                        <button class="btn btn-primary w-100" type="submit">Login</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+      </div>
+    </div>
+
+</section>
+
+{{-- <div class="container">
+
+    
+	<div class="d-flex justify-content-center h-100">
+        @if(session()->has('success'))
+            <script>
+                alert("{{ session('success') }}");
+            </script>
+         @endif
+    
+        @if(session()->has('loginError'))
+            <script>
+                alert("{{ session('loginError') }}");
+            </script>
+        @endif
+		<div class="card">
+			<div class="card-header">
+				<h3>Login</h3>
+			</div>
+			<div class="card-body">
+				<form action="/login" method="post">
+                    @csrf
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-user"></i></span>
+						</div>
+						<input type="email" class="form-control" name="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="email@example.com" autofocus required value="{{ old('email') }}">
+                        @error('email')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
-                    @enderror
-                </div>
-                <div class="form-floating">
-                    <input type="password" name="password" class="form-control" id="password" placeholder="Password" required>
-                    <label for="password">Password</label>
-                </div>
-                <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
-            </form>
-            <small class="d-block text-center mt-3">Not registered? <a href="/register" class="text-decoration-none">Register Now!</a></small>
-        </main>
+                        @enderror
+					</div>
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-key"></i></span>
+						</div>
+						<input type="password" name="password" class="form-control" id="password" placeholder="password" required>
+					</div>
+					
+					<div class="form-group">
+						<input type="submit" class="btn float-right login_btn">
+					</div>
+				</form>
+			</div>
+		</div>
 
-
-    </div>
+        
+	</div>
 </div> --}}
 
-<div class="row justify-content-center">
+{{-- <div class="row justify-content-center">
     <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
         @if(session()->has('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -56,7 +147,7 @@
             </a>
         </div><!-- End Logo -->
 
-        <div class="mb-3 card" style="margin-bottom: 30px; border: none; border-radius: 5px; box-shadow: 0px 0 50px rgba(0, 0, 0, 0.1);">
+        <div class="mb-3 card" style="margin-bottom: 30px; border: none; border-radius: 5px; box-shadow: 0px 0 50px rgba(0, 0, 0, 0.1); background-color: rgba(255, 255, 255, 0.5);">
             <div class="card-body">
 
                 <div class="pt-4 pb-2">
@@ -96,7 +187,7 @@
         </div>
 
     </div>
-</div>
+</div> --}}
 
 
  

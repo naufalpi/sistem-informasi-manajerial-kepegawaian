@@ -8,6 +8,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\DashboardReportController;
+use App\Http\Controllers\DashboardPegawaiController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -27,18 +28,8 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/about', function () {
-    return view('about', [
-        "title" => "About"
-    ]);
-});
 
 
-Route::get('/account', function () {
-    return view('account', [
-        "title" => "Account"
-    ]);
-});
 
 Route::get('/reports', [ReportController::class, 'index']);
 // halaman single report
@@ -71,4 +62,5 @@ Route::get('/dashboard/categories/checkSlug', [AdminCategoryController::class, '
 Route::resource('/dashboard/categories', AdminCategoryController::class)->except('show')->middleware('admin');
 
 Route::resource('/dashboard/profiles', UserController::class)->middleware('auth');
+Route::resource('/dashboard/pegawai', DashboardPegawaiController::class)->middleware('auth');
 
