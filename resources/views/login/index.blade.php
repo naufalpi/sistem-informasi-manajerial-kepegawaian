@@ -5,12 +5,12 @@
 
 <section class="section register min-vh-100 d-flex flex-column align-items-center">
     <div class="container mt-3">
-        <h1 class="text-center pb-0 display-4" style="color: white; font-weight: bold; text-shadow: 2px 2px 4px #000">SELAMAT DATANG DI SISTEM INFORMASI MANAJERIAL KEPEGAWAIAN KANTOR DESA WANAKARSA</h1>
+        <h3 class="text-center pb-0 display-4" style="color: white; font-weight: bold; text-shadow: 2px 2px 4px #000">SELAMAT DATANG DI SISTEM INFORMASI MANAJERIAL KEPEGAWAIAN KANTOR DESA WANAKARSA</h3>
     </div>
 
     <div class="container mt-5">
       <div class="row justify-content-center">
-        <div class="mt-5 col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+        <div class="mt-3 col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
             @if(session()->has('success'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     {{ session('success') }}
@@ -19,18 +19,18 @@
             @endif
 
             @if(session()->has('loginError'))
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    {{ session('loginError') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
+                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                <script>
+                Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: '{{ session('loginError') }}',
+                });
+                </script>
             @endif
 
         
-            {{-- <div class="d-flex justify-content-center py-4">
-                <a href="/" class="logo d-flex align-items-center w-auto">
-                  <img src="/image/logo.png" alt="">
-                </a>
-            </div> --}}
+         
             <div class="card mb-3" style="opacity: 0.9;">
                 
 

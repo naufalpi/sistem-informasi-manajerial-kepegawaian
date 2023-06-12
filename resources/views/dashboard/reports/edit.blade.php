@@ -81,3 +81,10 @@
   // }
 </script>
 @endsection
+
+@push('scripts')
+    @php
+        $pageTitle = 'Kelola Laporan Kerja';
+        $breadcrumbItem = 'Kelola Laporan Kerja';
+    @endphp
+@endpush

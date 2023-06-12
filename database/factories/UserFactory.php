@@ -26,7 +26,6 @@ class UserFactory extends Factory
             'tpt_lahir' => fake()->city(),
             'tgl_lahir' => fake()->date(),
             'alamat' => fake()->streetAddress(),
-            'foto' => fake()->image(null, 640, 480),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => bcrypt('12345'), // password

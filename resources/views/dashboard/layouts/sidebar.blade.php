@@ -35,13 +35,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link {{ Request::is('dashboard/pegawai*') ? 'active' : '' }}" href="/dashboard/pegawai">
-            <i class="bi bi-people"></i>
-            Kelola Data Pegawai
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link {{ Request::is('dashboard/') ? 'active' : '' }}" href="/dashboard/">
+        <a class="nav-link {{ Request::is('dashboard/cuti/pegawai*') ? 'active' : '' }}" href="/dashboard/cuti/pegawai">
             <i class="bi bi-calendar-plus"></i>
             Ajukan Cuti
         </a>
@@ -53,7 +47,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link {{ Request::is('dashboard/') ? 'active' : '' }}" href="/dashboard/">
+        <a class="nav-link {{ Request::is('dashboard/profiles') ? 'active' : '' }}" href="/dashboard/profiles">
             <i class="bi bi-person"></i>
             Profil Pengguna
         </a>
@@ -70,12 +64,6 @@
             Kelola Kepensiunan
         </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link {{ Request::is('dashboard/') ? 'active' : '' }}" href="/dashboard/">
-            <i class="bi bi-calendar-check"></i>
-            Kelola Cuti Pegawai
-        </a>
-      </li>
     </ul>
 
     @can('admin')
@@ -83,9 +71,16 @@
       <li class="nav-heading">Administrator</li>
 
       <li class="nav-item">
-        <a class="nav-link {{ Request::is('dashboard/categories*') ? 'active' : '' }}" href="/dashboard/categories">
-            <i class="bi bi-grid"></i>
-            Categories
+        <a class="nav-link {{ Request::is('dashboard/cuti/admin*') ? 'active' : '' }}" href="/dashboard/cuti/admin">
+          <i class="bi bi-calendar-check"></i>
+            Kelola Cuti
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link {{ Request::is('dashboard/pegawai*') ? 'active' : '' }}" href="/dashboard/pegawai">
+            <i class="bi bi-people"></i>
+            Kelola Data Pegawai
         </a>
       </li>
     </ul>

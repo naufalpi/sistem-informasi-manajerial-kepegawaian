@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('pendidikan_id');
             $table->string('name');
             $table->string('username')->unique();
-            $table->string('nrp')->unique();
+            $table->integer('nrp')->unique();
             $table->string('tpt_lahir');
             $table->date('tgl_lahir');
             $table->string('alamat');

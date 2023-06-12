@@ -35,5 +35,6 @@
     <script src="/js/dashboard/bootstrap/js/bootstrap.bundle.min.js"></script>
     
     <script src="/js/dashboard/main.js"></script>
+    
 </body>
 </html>

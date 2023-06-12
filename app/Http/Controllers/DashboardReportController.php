@@ -44,7 +44,7 @@ class DashboardReportController extends Controller
             'kegiatan' => 'required|max:255',
             'slug' => 'required|unique:reports',
             'tanggal' => 'required',
-            'file' => 'file|max:1024',
+            'file' => 'file|max:1024|mimes:pdf',
             'keterangan' => 'required'
         ]);
 
@@ -56,7 +56,7 @@ class DashboardReportController extends Controller
 
         Report::create($validatedData);
 
-        return redirect('/dashboard/reports')->with('success', 'New report has been added!');
+        return redirect('/dashboard/reports')->with('success', 'Laporan berhasil ditambahkan!');
     }
 
     /**
@@ -120,7 +120,7 @@ class DashboardReportController extends Controller
         Report::where('id', $report->id)
             ->update($validatedData);
 
-        return redirect('/dashboard/reports')->with('success', 'Report has been updated!');
+        return redirect('/dashboard/reports')->with('success', 'Laporan berhasil diubah!');
     }
 
     /**
@@ -136,7 +136,7 @@ class DashboardReportController extends Controller
         }
         Report::destroy($report->id);
 
-        return redirect('/dashboard/reports')->with('success', 'Report has been deleted!');
+        return redirect('/dashboard/reports')->with('success', 'Laporan berhasil dihapus!');
     }
 
     public function checkSlug(Request $request)

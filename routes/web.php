@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ReportController;
@@ -9,6 +9,8 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\DashboardReportController;
 use App\Http\Controllers\DashboardPegawaiController;
+use App\Http\Controllers\DashboardCutiPegawaiController;
+use App\Http\Controllers\DashboardCutiAdminController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -23,6 +25,10 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get('/', function () {
+    if (Auth::check()) {
+        return redirect('/dashboard');
+    }
+
     return view('login.index', [
         "title" => "Login"
     ]);
@@ -33,15 +39,9 @@ Route::get('/', function () {
 
 Route::get('/reports', [ReportController::class, 'index']);
 // halaman single report
-Route::get('reports/{report:slug}', [ReportController::class, 'show']);
 
 
-Route::get('/categories', function(){
-    return view('categories', [
-        'title' => 'Report Categories',
-        'categories' => Category::all()
-    ]);
-});
+
 
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);
@@ -62,5 +62,21 @@ Route::get('/dashboard/categories/checkSlug', [AdminCategoryController::class, '
 Route::resource('/dashboard/categories', AdminCategoryController::class)->except('show')->middleware('admin');
 
 Route::resource('/dashboard/profiles', UserController::class)->middleware('auth');
-Route::resource('/dashboard/pegawai', DashboardPegawaiController::class)->middleware('auth');
+Route::resource('/dashboard/pegawai', DashboardPegawaiController::class)->middleware('admin');
+
+Route::resource('/dashboard/cuti/pegawai', DashboardCutiPegawaiController::class)->middleware('auth');
+
+Route::middleware(['admin'])->group(function () {
+    Route::resource('/dashboard/cuti/admin', DashboardCutiAdminController::class)->except(['approve', 'reject']);
+    Route::put('/dashboard/cuti/admin/{cuti}/approve', [DashboardCutiAdminController::class, 'approve'])->name('cuti.approve');
+    Route::put('/dashboard/cuti/admin/{cuti}/reject', [DashboardCutiAdminController::class, 'reject'])->name('cuti.reject');
+});
+
+// Route::middleware(['auth'])->group(function () {
+//     Route::resource('/dashboard/cuti', DashboardCutiController::class)->except(['show', 'edit', 'update', 'destroy']);
+//     Route::put('/dashboard/cuti/approve', [DashboardCutiController::class, 'approve'])->name('cuti.approve');
+//     Route::put('/dashboard/categories/reject', [DashboardCutiController::class, 'reject'])->name('cuti.reject');
+// });
+
+
 

@@ -10,10 +10,17 @@
       </div>
 
       @if(session()->has('success'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-          {{ session('success') }}
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
+        <script>
+          document.addEventListener('DOMContentLoaded', function() {
+            Swal.fire({
+              title: 'Success',
+              text: '{{ session('success') }}',
+              icon: 'success',
+              timer: 3000, // Waktu dalam milidetik (3000ms = 3 detik)
+              showConfirmButton: false
+            });
+          });
+        </script>
       @endif
     
       <a href="/dashboard/reports/create" class="btn btn-primary mb-3">Buat Laporan Baru</a>
@@ -28,8 +35,8 @@
                 <th scope="col">#</th>
                 <th scope="col">Kegiatan</th>
                 <th scope="col">Tanggal</th>
-                <th scope="col">File</th>
-                <th scope="col">Action</th>
+                <th scope="col" class="text-center">File</th>
+                <th scope="col" class="text-center">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -38,15 +45,22 @@
                   <td>{{ $loop->iteration }}</td>
                   <td>{{ $report->kegiatan }}</td>
                   <td>{{ $report->tanggal }}</td>
-                  <td>{{ $report->file }}</td>
-                  <td>
+                  <td class="text-center">
+                    @if ($report->file)
+                      <a href="{{ asset('storage/'.$report->file) }}" target="_blank">
+                        <img src="/image/pdf.png" alt="" style="width: 20px">
+                      </a>
+                    @else
+                      N/A
+                    @endif
+                  </td>
+                  <td class="text-center">
                     <a href="/dashboard/reports/{{ $report->slug }}" class="badge bg-info"><i class="bi bi-eye"></i></span></a>
                     <a href="/dashboard/reports/{{ $report->slug }}/edit" class="badge bg-warning"><i class="bi bi-pencil"></i></span></a>
-                    <form action="/dashboard/reports/{{ $report->slug }}" method="post" class="d-inline">
+                    <form action="/dashboard/reports/{{ $report->slug }}" method="post" class="d-inline" id="delete-form-{{ $report->slug }}">
                       @method('delete')
                       @csrf
-                      {{-- <button id="btnConfirm" class="badge bg-danger border-0" onclick="return confirm('Are you sure?')"><i class="bi bi-x-circle"></i></button> --}}
-                      <button class="badge bg-danger border-0" onclick="return confirm('Are you sure?')"><i class="bi bi-x-circle"></i></button>
+                      <button class="badge bg-danger border-0" onclick="confirmDelete(event, '{{ $report->slug }}')"><i class="bi bi-x-circle"></i></button>
                     </form>
                   </td>
                 </tr>
@@ -62,5 +76,33 @@
   </div>
 </section>
 
+<script>
+  function confirmDelete(event, id) {
+    event.preventDefault(); // Hentikan pengiriman form default
 
+    // Tampilkan konfirmasi SweetAlert
+    Swal.fire({
+      title: 'Apakah Anda yakin?',
+      text: "Anda akan menghapus laporan ini!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Ya, hapus!',
+      cancelButtonText: 'Batal'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Jika pengguna mengklik "Ya, hapus", kirimkan form
+        document.getElementById('delete-form-' + id).submit();
+      }
+    });
+  }
+</script>
 @endsection
+
+@push('scripts')
+    @php
+        $pageTitle = 'Kelola Laporan Kerja';
+        $breadcrumbItem = 'Kelola Laporan Kerja';
+    @endphp
+@endpush

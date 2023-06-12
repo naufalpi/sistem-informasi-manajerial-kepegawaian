@@ -75,7 +75,7 @@
 
 @push('scripts')
     @php
-        $pageTitle = 'Lihat Data Diri';
-        $breadcrumbItem = 'Lihat Data Diri';
+        $pageTitle = 'Kelola Data Pegawai';
+        $breadcrumbItem = 'Kelola Data Pegawai';
     @endphp
 @endpush

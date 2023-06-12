@@ -3,7 +3,7 @@
 @section('container')
 
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">Buat Laporam Baru</h1>
+    <h1 class="h2">Buat Laporan Baru</h1>
 </div>
 
 <div class="col-lg-8">
@@ -83,3 +83,10 @@
   
 </script>
 @endsection
+
+@push('scripts')
+    @php
+        $pageTitle = 'Kelola Laporan Kerja';
+        $breadcrumbItem = 'Kelola Laporan Kerja';
+    @endphp
+@endpush

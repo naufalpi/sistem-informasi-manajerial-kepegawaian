@@ -43,6 +43,11 @@
 
       <li class="nav-item dropdown pe-3">
         <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+          @if (auth()->user()->foto)
+            <img src="{{ asset('storage/' . auth()->user()->foto) }}" alt="{{ auth()->user()->name }}" class="rounded-circle" style="width: 30px; height: 30px; object-fit: cover;">
+          @else
+            <img src="/image/foto-null.jpeg" alt="{{ auth()->user()->name }}" class="rounded-circle" style="width: 30px; height: 30px; object-fit: cover;">
+          @endif
           <span class="d-block d-md-block dropdown-toggle ps-2">{{ auth()->user()->name }}</span>
         </a><!-- End Profile Iamge Icon -->
 

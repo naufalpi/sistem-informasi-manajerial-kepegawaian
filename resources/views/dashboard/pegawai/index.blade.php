@@ -8,45 +8,53 @@
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
           <h1 class="h2">Daftar Perangkat Desa Wanakarsa</h1>
         </div>
-  
+        
         @if(session()->has('success'))
-          <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>
-        @endif
+        <script>
+          document.addEventListener('DOMContentLoaded', function() {
+            Swal.fire({
+              title: 'Success',
+              text: '{{ session('success') }}',
+              icon: 'success',
+              timer: 3000, // Waktu dalam milidetik (3000ms = 3 detik)
+              showConfirmButton: false
+            });
+          });
+        </script>
+      @endif
       
-        <a href="/dashboard/pegawai/create" class="btn btn-primary mb-3">Buat Data Perangkat Desa</a>
+        <a href="/dashboard/pegawai/create" class="btn btn-primary mb-3">Buat Data Pegawai</a>
       
         <div class="card">
           <div class="card-body">
             <h5 class="card-title"></h5>
       
-            <table class="table">
+            <table class="table table-bordered">
               <thead>
-                <tr>
+                <tr class="text-center">
                   <th scope="col">#</th>
                   <th scope="col">Nama</th>
                   <th scope="col">Jabatan</th>
                   <th scope="col">NRP</th>
                   <th scope="col">Alamat</th>
+                  <th scope="col">Action</th>
                 </tr>
               </thead>
               <tbody>
                 @foreach ($users as $pegawai)
                   <tr>
-                    <td>{{ $loop->iteration }}</td>
+                    <td class="text-center">{{ $loop->iteration }}</td>
                     <td>{{ $pegawai->name }}</td>
                     <td>{{ $pegawai->jabatan->name }}</td>
                     <td>{{ $pegawai->nrp }}</td>
                     <td>{{ $pegawai->alamat }}</td>
-                    <td>
+                    <td class="text-center">
                       <a href="/dashboard/pegawai/{{ $pegawai->id }}" class="badge bg-info"><i class="bi bi-eye"></i></span></a>
                       <a href="/dashboard/pegawai/{{ $pegawai->id }}/edit" class="badge bg-warning"><i class="bi bi-pencil"></i></span></a>
-                      <form action="/dashboard/pegawai/{{ $pegawai->id }}" method="post" class="d-inline">
+                      <form action="/dashboard/pegawai/{{ $pegawai->id }}" method="post" class="d-inline" id="delete-form-{{ $pegawai->id }}">
                         @method('delete')
                         @csrf
-                        <button class="badge bg-danger border-0" onclick="return confirm('Are you sure?')"><i class="bi bi-x-circle"></i></button>
+                        <button class="badge bg-danger border-0" onclick="confirmDelete(event, '{{ $pegawai->id }}')"><i class="bi bi-x-circle"></i></button>
                       </form>
                     </td>
                   </tr>
@@ -62,5 +70,34 @@
     </div>
   </section>
 
+  <script>
+    function confirmDelete(event, id) {
+      event.preventDefault(); // Hentikan pengiriman form default
+  
+      // Tampilkan konfirmasi SweetAlert
+      Swal.fire({
+        title: 'Apakah Anda yakin?',
+        text: "Anda akan menghapus data pegawai ini!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Ya, hapus!',
+        cancelButtonText: 'Batal'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // Jika pengguna mengklik "Ya, hapus", kirimkan form
+          document.getElementById('delete-form-' + id).submit();
+        }
+      });
+    }
+  </script>
 
 @endsection
+
+@push('scripts')
+    @php
+        $pageTitle = 'Kelola Data Pegawai';
+        $breadcrumbItem = 'Kelola Data Pegawai';
+    @endphp
+@endpush

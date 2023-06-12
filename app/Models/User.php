@@ -64,4 +64,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Pendidikan::class);
     }
+
+    public function cuti()
+    {
+        return $this->hasMany(Cuti::class);
+    }
 }

@@ -3,11 +3,11 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Models\Category;
-use App\Models\Post;
+use App\Models\Cuti;
 use App\Models\User;
-use App\Models\Jabatan;
 use App\Models\Report;
+use App\Models\Jabatan;
+use App\Models\Category;
 use App\Models\Pendidikan;
 use Illuminate\Database\Seeder;
 
@@ -91,11 +91,12 @@ class DatabaseSeeder extends Seeder
             'tpt_lahir' => fake()->city(),
             'tgl_lahir' => fake()->date(),
             'alamat' => fake()->streetAddress(),
-            'foto' => fake()->image(null, 640, 480),
             'email' => 'naufal@gmail.com',
             'email_verified_at' => now(),
             'password' => bcrypt('12345')
         ]);
+
+        
 
 
         User::factory(11)->create();
@@ -118,6 +119,31 @@ class DatabaseSeeder extends Seeder
 
         
         Report::factory(15)->create();
+
+        Cuti::create([
+            'user_id' => '1',
+            'tanggal' => fake()->date(),
+            'keperluan' => fake()->title()
+        ]);
+
+
+        Cuti::create([
+            'user_id' => '1',
+            'tanggal' => fake()->date(),
+            'keperluan' => fake()->title()
+        ]);
+
+        Cuti::create([
+            'user_id' => '1',
+            'tanggal' => fake()->date(),
+            'keperluan' => fake()->title()
+        ]);
+
+        Cuti::create([
+            'user_id' => '1',
+            'tanggal' => fake()->date(),
+            'keperluan' => fake()->title()
+        ]);
 
     }
 }

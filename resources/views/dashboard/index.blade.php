@@ -239,3 +239,11 @@
  
 
 @endsection
+
+
+@push('scripts')
+    @php
+        $pageTitle = 'Dashboard';
+        $breadcrumbItem = 'Dashboard';
+    @endphp
+@endpush
