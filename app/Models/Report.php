@@ -13,7 +13,7 @@ class Report extends Model
     //protected $fillable = ['title', 'slug', 'excerpt', 'body'];
 
     protected $guarded = ['id'];
-    protected $with = ['author'];
+    protected $with = ['user'];
 
     public function scopeFilter($query, array $filters)
     {
@@ -29,9 +29,9 @@ class Report extends Model
             
         // });
 
-        $query->when($filters['author'] ?? false, fn($query, $author) =>
-            $query->whereHas('author', fn($query) =>
-                $query->where('username', $author)
+        $query->when($filters['user'] ?? false, fn($query, $user) =>
+            $query->whereHas('user', fn($query) =>
+                $query->where('username', $user)
             )
         );
     }
@@ -41,7 +41,7 @@ class Report extends Model
     //     return $this->belongsTo(Category::class);
     // }
 
-    public function author()
+    public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
     }

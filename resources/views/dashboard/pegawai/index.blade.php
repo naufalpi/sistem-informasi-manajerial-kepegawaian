@@ -10,18 +10,18 @@
         </div>
         
         @if(session()->has('success'))
-        <script>
-          document.addEventListener('DOMContentLoaded', function() {
-            Swal.fire({
-              title: 'Success',
-              text: '{{ session('success') }}',
-              icon: 'success',
-              timer: 3000, // Waktu dalam milidetik (3000ms = 3 detik)
-              showConfirmButton: false
+          <script>
+            document.addEventListener('DOMContentLoaded', function() {
+              Swal.fire({
+                title: 'Success',
+                text: '{{ session('success') }}',
+                icon: 'success',
+                timer: 3000, // Waktu dalam milidetik (3000ms = 3 detik)
+                showConfirmButton: false
+              });
             });
-          });
-        </script>
-      @endif
+          </script>
+        @endif
       
         <a href="/dashboard/pegawai/create" class="btn btn-primary mb-3">Buat Data Pegawai</a>
       

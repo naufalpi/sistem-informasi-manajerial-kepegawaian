@@ -19,12 +19,14 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Welcome back, {{ auth()->user()->name }}</h5>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <marquee behavior="scroll" direction="left" scrollamount="10">
+                                <strong><span style="font-size: 35px;">Selamat Datang di Sistem Informasi Kepegawaian Kantor Desa Wanakarsa</span></strong>
+                            </marquee>
                         </div>
                     </div>
                 </div><!-- End Hello -->
 
-                 <!-- Reports -->
+                 {{-- <!-- Reports -->
                 <div class="col-12">
                     <div class="card">
                         <div class="filter">
@@ -100,12 +102,12 @@
                             <!-- End Line Chart -->
                         </div>
                     </div>
-                </div><!-- End Reports -->
+                </div><!-- End Reports --> --}}
 
             </div>
         </div><!-- End Left side columns -->
 
-        <!-- Right side columns -->
+        {{-- <!-- Right side columns -->
         <div class="col-lg-4">
 
             <!-- Recent Activity -->
@@ -232,7 +234,7 @@
                 </div>
             </div><!-- End News & Updates -->
 
-        </div><!-- End Right side columns -->
+        </div><!-- End Right side columns --> --}}
 
     </div>
   </section>

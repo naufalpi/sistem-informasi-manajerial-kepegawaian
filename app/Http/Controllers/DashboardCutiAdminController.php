@@ -15,7 +15,7 @@ class DashboardCutiAdminController extends Controller
     public function index()
     {
         return view('dashboard.cuti.admin.index', [
-            'cutis' => Cuti::all()
+            'cutis' => Cuti::with('user')->get()
         ]);
     }
 

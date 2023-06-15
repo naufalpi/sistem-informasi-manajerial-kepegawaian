@@ -29,6 +29,12 @@
         </a>
       </li>
       <li class="nav-item">
+        <a class="nav-link {{ Request::is('dashboard/profiles') ? 'active' : '' }}" href="/dashboard/profiles">
+            <i class="bi bi-person"></i>
+            Profil Pengguna
+        </a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link {{ Request::is('dashboard/reports*') ? 'active' : '' }}" href="/dashboard/reports">
             <i class="bi bi-journal-text"></i>
             Kelola Laporan Kerja
@@ -46,24 +52,7 @@
             Kelola Presensi
         </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link {{ Request::is('dashboard/profiles') ? 'active' : '' }}" href="/dashboard/profiles">
-            <i class="bi bi-person"></i>
-            Profil Pengguna
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link {{ Request::is('dashboard/') ? 'active' : '' }}" href="/dashboard/">
-            <i class="bi bi-person-badge"></i>
-            Kelola Mutasi
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link {{ Request::is('dashboard/') ? 'active' : '' }}" href="/dashboard/">
-            <i class="bi bi-person-badge"></i>
-            Kelola Kepensiunan
-        </a>
-      </li>
+      
     </ul>
 
     @can('admin')
@@ -81,6 +70,24 @@
         <a class="nav-link {{ Request::is('dashboard/pegawai*') ? 'active' : '' }}" href="/dashboard/pegawai">
             <i class="bi bi-people"></i>
             Kelola Data Pegawai
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {{ Request::is('dashboard/lihat-reports*') ? 'active' : '' }}" href="/dashboard/lihat-reports">
+            <i class="bi bi-journal-text"></i>
+            Lihat Laporan Kerja
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {{ Request::is('dashboard/mutasi*') ? 'active' : '' }}" href="/dashboard/mutasi">
+            <i class="bi bi-person-badge"></i>
+            Kelola Mutasi
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {{ Request::is('dashboard/') ? 'active' : '' }}" href="/dashboard/">
+            <i class="bi bi-person-badge"></i>
+            Kelola Kepensiunan
         </a>
       </li>
     </ul>

@@ -5,7 +5,7 @@
 
 <section class="section">
     <div class="row">
-      <div class="col-lg-6">
+      <div class="col-lg-8">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h1 class="h2">Daftar Pengajuan Cuti</h1>
           </div>
@@ -32,6 +32,8 @@
               <thead>
                 <tr>
                   <th scope="col">#</th>
+                  <th scope="col">Nama</th>
+                  <th scope="col">Jabatan</th>
                   <th scope="col">Tanggal</th>
                   <th scope="col">Keperluan</th>
                   <th scope="col" class="text-center">Aksi</th>
@@ -41,6 +43,8 @@
                 @foreach ($cutis as $cuti)
                   <tr>
                     <td>{{ $loop->iteration }}</td>
+                    <td>{{ $cuti->user->name }}</td>
+                    <td>{{ $cuti->user->jabatan->name }}</td>
                     <td>{{ $cuti->tanggal }}</td>
                     <td>{{ $cuti->keperluan }}</td>
                     <td class="text-center">
