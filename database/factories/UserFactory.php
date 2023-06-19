@@ -27,7 +27,7 @@ class UserFactory extends Factory
             'tgl_lahir' => fake()->date(),
             'alamat' => fake()->streetAddress(),
             'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
+            'no_hp' => fake()->phoneNumber(),
             'password' => bcrypt('12345'), // password
             'remember_token' => Str::random(10),
         ];

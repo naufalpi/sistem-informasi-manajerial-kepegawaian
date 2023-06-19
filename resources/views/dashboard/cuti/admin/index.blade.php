@@ -6,9 +6,7 @@
 <section class="section">
     <div class="row">
       <div class="col-lg-8">
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 class="h2">Daftar Pengajuan Cuti</h1>
-          </div>
+        
         @if(session()->has('success'))
           <script>
             document.addEventListener('DOMContentLoaded', function() {
@@ -26,14 +24,14 @@
       
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title"></h5>
-      
-            <table class="table">
+            <h5 class="card-title">Daftar Pengajuan Cuti</h5>
+            
+            <table class="table table-borderless datatable">
               <thead>
-                <tr>
+                <tr class="table-primary">
                   <th scope="col">#</th>
                   <th scope="col">Nama</th>
-                  <th scope="col">Jabatan</th>
+                  <th scope="col" class="hide-on-mobile">Jabatan</th>
                   <th scope="col">Tanggal</th>
                   <th scope="col">Keperluan</th>
                   <th scope="col" class="text-center">Aksi</th>
@@ -44,7 +42,7 @@
                   <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $cuti->user->name }}</td>
-                    <td>{{ $cuti->user->jabatan->name }}</td>
+                    <td class="hide-on-mobile">{{ $cuti->user->jabatan->name }}</td>
                     <td>{{ $cuti->tanggal }}</td>
                     <td>{{ $cuti->keperluan }}</td>
                     <td class="text-center">

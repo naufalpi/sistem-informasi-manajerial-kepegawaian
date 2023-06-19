@@ -108,7 +108,7 @@
 
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control  @error('email') is-invalid @enderror" id="email" name="email" required autofocus value="{{ old('email', $user->email) }}">
+                            <input type="email" class="form-control  @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email', $user->email) }}">
                             @error('email')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -185,6 +185,6 @@
 @push('scripts')
     @php
         $pageTitle = 'Kelola Data Pegawai';
-        $breadcrumbItem = 'Kelola Data Pegawai';
+        $breadcrumbItem = 'Kelola Data Pegawai / Edit Data Pegawai';
     @endphp
 @endpush

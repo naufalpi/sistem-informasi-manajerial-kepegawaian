@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Report;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class DashboardLihatReportController extends Controller
 {
@@ -13,54 +14,31 @@ class DashboardLihatReportController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index(Request $request)
     {
-        $queryAll = Report::with('user');
-        $sort = $request->query('sort');
+        $filter = $request->query('filter', 'today');
+        $reports = $this->getFilteredReports($filter);
         
-        switch ($sort) {
-            case 'name':
-                $queryAll->orderBy('name');
-                break;
-            case 'latest':
-            default:
-                $queryAll->latest();
-                break;
-        }
-        
-        $allReports = $queryAll->get();
-        
-        $today = Carbon::now()->format('Y-m-d');
-        $queryToday = Report::with('user')->whereDate('created_at', $today);
-        
-        if ($sort === 'name') {
-            $queryToday->orderBy('name');
-        } else {
-            $queryToday->latest();
-        }
-        
-        $todayReports = $queryToday->get();
-        
-        $weekStart = Carbon::now()->startOfWeek()->format('Y-m-d');
-        $weekEnd = Carbon::now()->endOfWeek()->format('Y-m-d');
-        
-        $queryWeek = Report::with(['user' => function ($query) use ($sort) {
-            if ($sort === 'name') {
-                $query->orderBy('name');
-            }
-        }])
-        ->whereBetween('created_at', [$weekStart, $weekEnd])
-        ->latest();
-        
-        $weekReports = $queryWeek->get();
-        
-        // Mendapatkan query string saat ini dari URL
-        $queryString = $request->getQueryString();
-        
-        return view('dashboard.lihat-reports.index', compact('allReports', 'todayReports', 'weekReports', 'queryString'));
-        
+        return view('dashboard.lihat-reports.index', compact('reports', 'filter'));
     }
     
+    private function getFilteredReports($filter)
+    {
+        $query = Report::query()->with('user');
+        
+        if ($filter == 'today') {
+            $query->whereDate('tanggal', Carbon::today());
+        } elseif ($filter == 'this_week') {
+            $query->whereBetween('tanggal', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()]);
+        } elseif ($filter == 'this_month') {
+            $query->whereYear('tanggal', Carbon::now()->year)->whereMonth('tanggal', Carbon::now()->month);
+        } elseif ($filter == 'this_year') {
+            $query->whereYear('tanggal', Carbon::now()->year);
+        }
+        
+        return $query->orderByDesc('created_at')->get();
+    }
 
 
 
@@ -96,7 +74,9 @@ class DashboardLihatReportController extends Controller
      */
     public function show(Report $report)
     {
-        //
+        return view('dashboard.lihat-reports.show', [
+            'report' => $report
+        ]);
     }
 
     /**
@@ -131,5 +111,11 @@ class DashboardLihatReportController extends Controller
     public function destroy(Report $report)
     {
         //
+    }
+
+    public function checkSlug(Request $request)
+    {
+        $slug = SlugService::createSlug(Report::class, 'slug', $request->kegiatan);
+        return response()->json(['slug' => $slug]);
     }
 }

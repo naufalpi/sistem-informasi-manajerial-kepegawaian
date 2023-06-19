@@ -21,9 +21,20 @@ class DashboardPegawaiController extends Controller
     public function index()
     {
         return view('dashboard.pegawai.index', [
-            'users' => User::all()
+            'users' => User::with('jabatan')
+                ->leftJoin('jabatans', 'users.jabatan_id', '=', 'jabatans.id')
+                ->selectRaw("users.*, jabatans.name AS jabatan_name")
+                ->orderByRaw("CASE WHEN users.jabatan_id = 1 THEN 1 WHEN users.jabatan_id = 2 THEN 2 ELSE 3 END, 
+                    CASE WHEN jabatans.name LIKE 'Kasi%' THEN 1 WHEN jabatans.name LIKE 'Kaur%' THEN 2 WHEN jabatans.name LIKE 'Kadus%' THEN 3 ELSE 4 END")
+                ->get()
         ]);
+        
     }
+
+    
+
+
+    
 
     /**
      * Show the form for creating a new resource.
@@ -50,16 +61,17 @@ class DashboardPegawaiController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|max:255',
-            'username' => 'required|max:255',
-            'nrp' => 'required|min:6|max:255',
+            'username' => 'required|unique:users|max:255',
+            'nrp' => 'required|unique:users|min:6|max:255',
             'jabatan_id' => 'required',
             'pendidikan_id' => 'required',
             'tpt_lahir' => 'required|max:255',
             'tgl_lahir' => 'required|max:255',
             'alamat' => 'required|max:255',
             'foto' => 'image|file|max:1024',
-            'email' => 'required|email:dns|unique:users',
-            'password' => 'required|min:6|max:255'
+            'email' => 'nullable|email|unique:users',
+            'no_hp' => 'required|unique:users',
+            'password' => 'required|min:5|max:255'
         ]);
 
         $validatedData['password'] = Hash::make($validatedData['password']);
@@ -128,7 +140,7 @@ class DashboardPegawaiController extends Controller
             'tgl_lahir' => 'required|max:255',
             'alamat' => 'required|max:255',
             'foto' => 'image|file|max:1024',
-            'email' => 'required|email|unique:users,email,' . $id
+            'email' => 'nullable|email|unique:users,email,' . $id
         ]);
 
         // Cek apakah ada file foto yang diunggah

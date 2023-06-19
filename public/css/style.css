@@ -13,6 +13,7 @@
 }
 
 
+
 body {
   font-family: "Open Sans", sans-serif;
   background-image: url('/image/kantor_desa_nyolong.jpg');
@@ -69,6 +70,10 @@ h6 {
   margin-bottom: 0;
   font-weight: 600;
   color: #012970;
+}
+
+.welcome-title {
+  font-size: 12px;
 }
 
 /*--------------------------------------------------------------

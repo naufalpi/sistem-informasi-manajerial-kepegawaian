@@ -5,10 +5,7 @@
 <section class="section">
     <div class="row">
       <div class="col-lg-12">
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-          <h1 class="h2">Daftar Perangkat Desa Wanakarsa</h1>
-        </div>
-        
+ 
         @if(session()->has('success'))
           <script>
             document.addEventListener('DOMContentLoaded', function() {
@@ -23,31 +20,35 @@
           </script>
         @endif
       
-        <a href="/dashboard/pegawai/create" class="btn btn-primary mb-3">Buat Data Pegawai</a>
-      
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <a href="/dashboard/pegawai/create" class="btn btn-primary mb-3">Buat Data Pegawai</a>
+        </div>
+  
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title"></h5>
+            <h5 class="card-title">Daftar Perangkat Desa Wanakarsa</h5>
       
-            <table class="table table-bordered">
+            <table class="table table-default table-sm">
               <thead>
-                <tr class="text-center">
-                  <th scope="col">#</th>
+                <tr class="table-success">
+                  <th scope="col" class="text-center">#</th>
                   <th scope="col">Nama</th>
                   <th scope="col">Jabatan</th>
                   <th scope="col">NRP</th>
                   <th scope="col">Alamat</th>
-                  <th scope="col">Action</th>
+                  <th scope="col">No. HP</th>
+                  <th scope="col" class="text-center">Action</th>
                 </tr>
               </thead>
               <tbody>
                 @foreach ($users as $pegawai)
                   <tr>
                     <td class="text-center">{{ $loop->iteration }}</td>
-                    <td>{{ $pegawai->name }}</td>
-                    <td>{{ $pegawai->jabatan->name }}</td>
+                    <td >{{ $pegawai->name }}</td>
+                    <td>{{ $pegawai->jabatan_name }}</td>
                     <td>{{ $pegawai->nrp }}</td>
                     <td>{{ $pegawai->alamat }}</td>
+                    <td>{{ $pegawai->no_hp }}</td>
                     <td class="text-center">
                       <a href="/dashboard/pegawai/{{ $pegawai->id }}" class="badge bg-info"><i class="bi bi-eye"></i></span></a>
                       <a href="/dashboard/pegawai/{{ $pegawai->id }}/edit" class="badge bg-warning"><i class="bi bi-pencil"></i></span></a>

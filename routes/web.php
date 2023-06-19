@@ -3,18 +3,22 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\ReportController;
+
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\LogActivityController;
 use App\Http\Controllers\AdminCategoryController;
-use App\Http\Controllers\DashboardReportController;
-use App\Http\Controllers\DashboardLihatReportController;
-use App\Http\Controllers\DashboardPegawaiController;
-use App\Http\Controllers\DashboardCutiPegawaiController;
-use App\Http\Controllers\DashboardCutiAdminController;
 use App\Http\Controllers\DashboardMutasiController;
-use App\Http\Controllers\UserController;
-use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
+use App\Http\Controllers\DashboardReportController;
+use App\Http\Controllers\DashboardPegawaiController;
+use App\Http\Controllers\DashboardPresensiController;
+use App\Http\Controllers\DashboardCutiAdminController;
+use App\Http\Controllers\DashboardPenilaianController;
+use App\Http\Controllers\DashboardCutiPegawaiController;
+use App\Http\Controllers\DashboardKepensiunanController;
+use App\Http\Controllers\DashboardLihatReportController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,8 +44,6 @@ Route::get('/', function () {
 
 
 
-Route::get('/reports', [ReportController::class, 'index']);
-// halaman single report
 
 
 
@@ -53,16 +55,18 @@ Route::post('/logout', [LoginController::class, 'logout']);
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
 
-Route::get('/dashboard', function() {
-    return view('dashboard.index',);
-})->middleware('auth');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 
 
 Route::get('/dashboard/reports/checkSlug', [DashboardReportController::class, 'checkSlug'])->middleware('auth');
 Route::resource('/dashboard/reports', DashboardReportController::class)->middleware('auth');
-// Route::resource('/dashboard/lihat-reports', DashboardLihatReportController::class)->middleware('admin');
-Route::get('/dashboard/lihat-reports', [DashboardLihatReportController::class, 'index'])->name('dashboard.lihat-reports.index')->middleware('admin');
 
+
+Route::middleware(['admin'])->group(function () {
+    Route::get('/dashboard/lihat-reports', [DashboardLihatReportController::class, 'index'])->name('dashboard.lihat-reports.index');
+    Route::get('/dashboard/lihat-reports/{report}', [DashboardLihatReportController::class, 'show'])->name('dashboard.lihat-reports.show');
+    Route::get('/dashboard/lihat-reports/checkSlug', [DashboardLihatReportController::class, 'checkSlug']);
+});
 
 Route::get('/dashboard/categories/checkSlug', [AdminCategoryController::class, 'checkSlug'])->middleware('admin');
 Route::resource('/dashboard/categories', AdminCategoryController::class)->except('show')->middleware('admin');
@@ -79,6 +83,18 @@ Route::middleware(['admin'])->group(function () {
 });
 
 Route::resource('/dashboard/mutasi', DashboardMutasiController::class)->middleware('admin');
+Route::resource('/dashboard/kepensiunan', DashboardKepensiunanController::class)->middleware('admin');
+
+Route::middleware(['admin'])->group(function () {
+    Route::get('/dashboard/kelola-presensi', [DashboardPresensiController::class, 'showAdminView']);
+    Route::post('/dashboard/buka-presensi', [DashboardPresensiController::class, 'bukaPresensi']);
+});
+
+Route::resource('/dashboard/penilaian', DashboardPenilaianController::class)->middleware('admin');
+
+Route::get('/dashboard/presensi', [DashboardPresensiController::class, 'showPresensiView'])->middleware('auth');
+Route::resource('/dashboard/log-activity', LogActivityController::class)->middleware('admin');
+
 
 
 

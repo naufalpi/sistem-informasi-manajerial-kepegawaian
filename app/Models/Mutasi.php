@@ -4,13 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\LogOptions;
 
 class Mutasi extends Model
 {
-    use HasFactory;
+    use HasFactory, LogsActivity;
 
-    protected $table = 'mutasi';
-    protected $fillable = ['tgl_surat', 'nomor', 'jml_lampiran', 'perihal', 'camat', 'tgl_musyawarah', 'perangkat_desa', 'kepala_desa', 'jabatan_lama', 'jabatan_baru', 'lampiran'];
-
-
+    protected $guarded = ['id'];
+    
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+        ->logUnguarded()
+        ->logOnlyDirty();
+        // Chain fluent methods for configuration options
+    }
 }

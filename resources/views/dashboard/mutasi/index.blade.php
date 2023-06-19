@@ -19,9 +19,10 @@
                 </script>
             @endif
         
-
-            <a href="/dashboard/mutasi/create" class="btn btn-primary mb-3">Buat Surat Rekomendasi Mutasi</a>
-
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+                <a href="/dashboard/mutasi/create" class="btn btn-primary mb-3">Buat Surat Rekomendasi Mutasi</a>
+            </div>
+           
         </div>
     </div>
 </section>

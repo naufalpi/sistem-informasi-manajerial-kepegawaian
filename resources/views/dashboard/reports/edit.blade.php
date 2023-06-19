@@ -30,7 +30,7 @@
         </div>
         <div class="mb-3">
           <label for="tanggal" class="form-label">Tanggal</label>
-          <input type="date" class="form-control @error('tanggal') is-invalid @enderror" id="tanggal" name="tanggal" required value="{{ old('tanggal') }}">
+          <input type="date" class="form-control @error('tanggal') is-invalid @enderror" id="tanggal" name="tanggal" required value="{{ old('tanggal', $report->tanggal) }}">
           @error('tanggal')
             <div class="invalid-feedback">
               {{ $message }}

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Cuti;
 use Illuminate\Http\Request;
 
@@ -14,8 +15,17 @@ class DashboardCutiPegawaiController extends Controller
      */
     public function index()
     {
+
+        setlocale(LC_TIME, 'id_ID');
+        Carbon::setLocale('id');
+        
         return view('dashboard.cuti.pegawai.index', [
-            'cutis' => Cuti::where('user_id', auth()->user()->id)->get()
+            'cutis' => Cuti::where('user_id', auth()->user()->id)
+                ->latest()
+                ->get()->map(function ($cuti) {
+                    $cuti->tanggal = Carbon::parse($cuti->tanggal)->translatedFormat('d F Y');
+                    return $cuti;
+                }),
         ]);
     }
 

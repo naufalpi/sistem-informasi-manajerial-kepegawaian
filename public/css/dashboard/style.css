@@ -37,6 +37,20 @@ h6 {
   font-family: "Nunito", sans-serif;
 }
 
+
+.toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+}
+
+.toggle-password:focus {
+  outline: none;
+}
 /*--------------------------------------------------------------
 # Main
 --------------------------------------------------------------*/

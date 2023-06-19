@@ -5,10 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\LogOptions;
 
 class Report extends Model
 {
-    use HasFactory, Sluggable;
+    use HasFactory, Sluggable, LogsActivity;
 
     //protected $fillable = ['title', 'slug', 'excerpt', 'body'];
 
@@ -58,5 +60,13 @@ class Report extends Model
                 'source' => 'kegiatan'
             ]
         ];
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+        ->logUnguarded()
+        ->logOnlyDirty();
+        // Chain fluent methods for configuration options
     }
 }

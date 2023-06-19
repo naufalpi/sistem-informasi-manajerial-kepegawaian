@@ -10,6 +10,7 @@
   <!-- Favicons -->
   <link href="/image/favicon.png" rel="icon">
   <link href="/image/apple-touch-icon.png" rel="apple-touch-icon">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -20,6 +21,41 @@
 
   <!-- Template Main CSS File -->
   <link href="/css/style.css" rel="stylesheet">
+
+  <style>
+    .welcome-title {
+      font-size: 40px;
+    }
+
+    .btn-block {
+      width: 100%;
+    }
+
+    @media (max-width: 576px) {
+      .welcome-title {
+        display: none;
+      }
+    }
+
+    .form-group {
+        position: relative;
+    }
+
+    .toggle-password {
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+      cursor: pointer;
+      background-color: transparent;
+      border: none;
+    }
+
+    .toggle-password:focus {
+      outline: none;
+    }
+
+  </style>
  
   </head>
 <body>

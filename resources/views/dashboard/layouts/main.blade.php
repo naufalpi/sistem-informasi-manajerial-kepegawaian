@@ -3,13 +3,15 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>SIMPEG | Dashboard</title>
+    <title>SI Kepegawaian | {{ $pageTitle }}</title>
    
 
     <!-- Favicons -->
     <link href="/image/logo.png" rel="icon">
     <link href="/image/apple-touch-icon.png" rel="apple-touch-icon">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -23,6 +25,8 @@
     <link href="/css/dashboard/quill/quill.bubble.css" rel="stylesheet">
     <link href="/css/dashboard/remixicon/remixicon.css" rel="stylesheet">
     <link href="/css/dashboard/simple-datatables/style.css" rel="stylesheet">
+    {{-- <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" type="text/css"> --}}
+   
 
     <!-- Template Main CSS File -->
     <link href="/css/dashboard/style.css" rel="stylesheet">
@@ -41,6 +45,31 @@
           justify-content: center;
           gap: 10px;
       }
+
+      @media (max-width: 767px) {
+        .hide-on-mobile {
+          display: none;
+        }
+      }
+
+      .form-group {
+         position: relative;
+      }
+
+      .toggle-password {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+        cursor: pointer;
+        background-color: transparent;
+        border: none;
+      }
+
+      .toggle-password:focus {
+        outline: none;
+      }
+
     </style>
 
 
@@ -71,7 +100,7 @@
             <li class="breadcrumb-item">{{ $breadcrumbItem }}</li>
           </ol>
         </nav>
-      </div><!-- End Page Title -->
+      </div>
 
       @yield('container')
   
@@ -95,5 +124,6 @@
 
     <!-- cropper -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.11/cropper.min.js"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" type="text/javascript"></script> --}}
   </body>
 </html>

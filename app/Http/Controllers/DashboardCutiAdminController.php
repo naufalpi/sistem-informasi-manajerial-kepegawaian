@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Cuti;
 use Illuminate\Http\Request;
 
@@ -14,10 +15,20 @@ class DashboardCutiAdminController extends Controller
      */
     public function index()
     {
+
+        setlocale(LC_TIME, 'id_ID');
+        Carbon::setLocale('id');
+
         return view('dashboard.cuti.admin.index', [
-            'cutis' => Cuti::with('user')->get()
+            'cutis' => Cuti::with('user')
+                ->latest()
+                ->get()->map(function ($cuti) {
+                    $cuti->tanggal = Carbon::parse($cuti->tanggal)->translatedFormat('d F Y');
+                    return $cuti;
+                }),
         ]);
     }
+    
 
     /**
      * Show the form for creating a new resource.

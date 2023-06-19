@@ -92,7 +92,7 @@ class DashboardMutasiController extends Controller
         $pdf->setPaper('A4', 'portrait');
 
         // Simpan file PDF ke dalam storage
-        $filename = 'surat-rekomendasi-' . time() . '.pdf';
+        $filename = 'surat-rekomendasi-mutasi-' . time() . '.pdf';
         $pdf->save(storage_path('app/public/' . $filename));
 
         // Kembalikan file PDF yang dihasilkan sebagai respons download

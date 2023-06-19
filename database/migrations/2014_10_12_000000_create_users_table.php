@@ -24,7 +24,8 @@ return new class extends Migration
             $table->date('tgl_lahir');
             $table->string('alamat');
             $table->string('foto')->nullable();
-            $table->string('email')->unique();
+            $table->string('email')->unique()->nullable();
+            $table->string('no_hp')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

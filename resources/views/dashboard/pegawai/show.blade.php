@@ -28,7 +28,7 @@
           
             <div class="tab-content pt-2">
 
-                <div class="fade show">
+                <div class="fade show profile-overview">
 
                     <h5 class="card-title">Detail Profil</h5>
 
@@ -56,6 +56,10 @@
                         <div class="col-lg-3 col-md-4 label">Alamat</div>
                         <div class="col-lg-9 col-md-8">{{ $user->alamat }}</div>
                     </div>
+                    <div class="row">
+                        <div class="col-lg-3 col-md-4 label">No. HP</div>
+                        <div class="col-lg-9 col-md-8">{{ $user->no_hp }}</div>
+                    </div>
 
                     <div class="row">
                         <div class="col-lg-3 col-md-4 label">Email</div>
@@ -76,6 +80,6 @@
 @push('scripts')
     @php
         $pageTitle = 'Kelola Data Pegawai';
-        $breadcrumbItem = 'Kelola Data Pegawai';
+        $breadcrumbItem = 'Kelola Data Pegawai / Lihat Data Pegawai';
     @endphp
 @endpush

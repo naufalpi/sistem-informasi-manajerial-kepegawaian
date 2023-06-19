@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Report;
-use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 
@@ -17,9 +18,21 @@ class DashboardReportController extends Controller
      */
     public function index()
     {
+
+        setlocale(LC_TIME, 'id_ID');
+        Carbon::setLocale('id');
+
+
         return view('dashboard.reports.index', [
-            'reports' => Report::where('user_id', auth()->user()->id)->get()
+            'reports' => Report::where('user_id', auth()->user()->id)
+                ->latest()
+                ->get()
+                ->map(function ($report) {
+                    $report->tanggal = Carbon::parse($report->tanggal)->translatedFormat('d F Y');
+                    return $report;
+                }),
         ]);
+
     }
 
     /**

@@ -83,7 +83,7 @@ class DatabaseSeeder extends Seeder
 
 
         User::create([
-            'jabatan_id' => mt_rand(1,11),
+            'jabatan_id' => '1',
             'pendidikan_id' => mt_rand(1,4),
             'name' => 'Naufal Akbar',
             'username' => 'naufalpi',
@@ -92,6 +92,7 @@ class DatabaseSeeder extends Seeder
             'tgl_lahir' => fake()->date(),
             'alamat' => fake()->streetAddress(),
             'email' => 'naufal@gmail.com',
+            'no_hp' => fake()->phoneNumber(),
             'email_verified_at' => now(),
             'password' => bcrypt('12345')
         ]);

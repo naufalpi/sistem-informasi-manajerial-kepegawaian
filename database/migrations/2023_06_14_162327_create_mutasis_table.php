@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('mutasi', function (Blueprint $table) {
+        Schema::create('mutasis', function (Blueprint $table) {
             $table->id();
             $table->date('tgl_surat');
             $table->string('nomor');

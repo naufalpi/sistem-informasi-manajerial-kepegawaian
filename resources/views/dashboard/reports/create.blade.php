@@ -2,60 +2,67 @@
 
 @section('container')
 
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">Buat Laporan Baru</h1>
-</div>
 
-<div class="col-lg-8">
-    <form method="post" action="/dashboard/reports" class="mb-5" enctype="multipart/form-data">
-        @csrf
-        <div class="mb-3">
-          <label for="kegiatan" class="form-label">Kegiatan</label>
-          <input type="text" class="form-control  @error('kegiatan') is-invalid @enderror" id="kegiatan" name="kegiatan" required autofocus value="{{ old('kegiatan') }}">
-          @error('kegiatan')
-            <div class="invalid-feedback">
-              {{ $message }}
-            </div>
-          @enderror
+
+<section class="section">
+  <div class="row">
+    <div class="col-lg-8">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Buat Laporan Baru</h5>
+          <form method="post" action="/dashboard/reports" class="mb-5" enctype="multipart/form-data">
+              @csrf
+              <div class="mb-3">
+                <label for="kegiatan" class="form-label">Kegiatan</label>
+                <input type="text" class="form-control  @error('kegiatan') is-invalid @enderror" id="kegiatan" name="kegiatan" required autofocus value="{{ old('kegiatan') }}">
+                @error('kegiatan')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                @enderror
+              </div>
+              <div class="mb-3">
+                <label for="slug" class="form-label">Slug</label>
+                <input type="text" class="form-control @error('slug') is-invalid @enderror" id="slug" name="slug" required value="{{ old('slug') }}" readonly>
+                @error('slug')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                @enderror
+              </div>
+              <div class="mb-3">
+                <label for="tanggal" class="form-label">Tanggal</label>
+                <input type="date" class="form-control @error('tanggal') is-invalid @enderror" id="tanggal" name="tanggal" required value="{{ old('tanggal') }}">
+                @error('tanggal')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                @enderror
+              </div>
+              <div class="mb-3">
+                <label for="file" class="form-label  @error('file') is-invalid @enderror">Upload File PDF</label>
+                <input class="form-control" type="file" id="file" name="file">
+                @error('file')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                @enderror
+              </div>
+              <div class="mb-3">
+                <label for="keterangan" class="form-label">Keterangan</label>
+                @error('keterangan')
+                  <p class="text-danger">{{ $message }}</p>
+                @enderror
+                <input id="keterangan" type="hidden" name="keterangan" value="{{ old('keterangan') }}">
+                <trix-editor input="keterangan"></trix-editor>
+              </div>
+              <button type="submit" class="btn btn-primary">Buat Laporan</button>
+          </form>
         </div>
-        <div class="mb-3">
-          <label for="slug" class="form-label">Slug</label>
-          <input type="text" class="form-control @error('slug') is-invalid @enderror" id="slug" name="slug" required value="{{ old('slug') }}" readonly>
-          @error('slug')
-            <div class="invalid-feedback">
-              {{ $message }}
-            </div>
-          @enderror
-        </div>
-        <div class="mb-3">
-          <label for="tanggal" class="form-label">Tanggal</label>
-          <input type="date" class="form-control @error('tanggal') is-invalid @enderror" id="tanggal" name="tanggal" required value="{{ old('tanggal') }}">
-          @error('tanggal')
-            <div class="invalid-feedback">
-              {{ $message }}
-            </div>
-          @enderror
-        </div>
-        <div class="mb-3">
-          <label for="file" class="form-label  @error('file') is-invalid @enderror">Upload File PDF</label>
-          <input class="form-control" type="file" id="file" name="file">
-          @error('file')
-            <div class="invalid-feedback">
-              {{ $message }}
-            </div>
-          @enderror
-        </div>
-        <div class="mb-3">
-          <label for="keterangan" class="form-label">Keterangan</label>
-          @error('keterangan')
-            <p class="text-danger">{{ $message }}</p>
-          @enderror
-          <input id="keterangan" type="hidden" name="keterangan" value="{{ old('keterangan') }}">
-          <trix-editor input="keterangan"></trix-editor>
-        </div>
-        <button type="submit" class="btn btn-primary">Buat Laporan</button>
-    </form>
-</div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <script>
   const kegiatan = document.querySelector('#kegiatan');
