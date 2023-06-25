@@ -123,28 +123,35 @@ class DatabaseSeeder extends Seeder
 
         Cuti::create([
             'user_id' => '1',
-            'tanggal' => fake()->date(),
-            'keperluan' => fake()->title()
+            'tgl_mulai' => fake()->date(),
+            'tgl_selesai' => fake()->date(),
+            'jenis_cuti' => 'Sakit',
+            'alasan' => fake()->paragraph()
         ]);
-
-
+        Cuti::create([
+            'user_id' => '2',
+            'tgl_mulai' => fake()->date(),
+            'tgl_selesai' => fake()->date(),
+            'jenis_cuti' => 'Sakit',
+            'alasan' => fake()->paragraph()
+        ]);
         Cuti::create([
             'user_id' => '1',
-            'tanggal' => fake()->date(),
-            'keperluan' => fake()->title()
+            'tgl_mulai' => fake()->date(),
+            'tgl_selesai' => fake()->date(),
+            'jenis_cuti' => 'Cuti Tahunan',
+            'alasan' => fake()->paragraph()
+        ]);
+        Cuti::create([
+            'user_id' => '5',
+            'tgl_mulai' => fake()->date(),
+            'tgl_selesai' => fake()->date(),
+            'jenis_cuti' => 'Melahirkan',
+            'alasan' => fake()->paragraph()
         ]);
 
-        Cuti::create([
-            'user_id' => '1',
-            'tanggal' => fake()->date(),
-            'keperluan' => fake()->title()
-        ]);
 
-        Cuti::create([
-            'user_id' => '1',
-            'tanggal' => fake()->date(),
-            'keperluan' => fake()->title()
-        ]);
+      
 
     }
 }

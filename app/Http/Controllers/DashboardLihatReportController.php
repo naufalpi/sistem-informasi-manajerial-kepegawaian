@@ -72,11 +72,30 @@ class DashboardLihatReportController extends Controller
      * @param  \App\Models\Report  $report
      * @return \Illuminate\Http\Response
      */
-    public function show(Report $report)
+    public function show($id)
     {
-        return view('dashboard.lihat-reports.show', [
-            'report' => $report
-        ]);
+        // Ambil data yang sesuai dengan ID
+        Carbon::setLocale('id');
+        
+        $report = Report::find($id);
+        
+    
+        // Pastikan data ditemukan
+        if (!$report) {
+            return response()->json(['error' => 'Data tidak ditemukan'], 404);
+        }
+
+        $formattedTanggal = Carbon::parse($report->tanggal)->translatedFormat('d F Y');
+    
+        // Format data yang akan dikirimkan
+        $data = [
+            'tanggal' => $formattedTanggal,
+            'kegiatan' => $report->kegiatan,
+            'file' => asset('storage/' . $report->file),
+            'keterangan' => $report->keterangan
+        ];
+    
+        return response()->json($data);
     }
 
     /**

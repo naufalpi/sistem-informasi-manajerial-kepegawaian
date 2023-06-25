@@ -28,16 +28,16 @@
           <div class="card-body">
             <h5 class="card-title">Daftar Perangkat Desa Wanakarsa</h5>
       
-            <table class="table table-default table-sm">
+            <table class="table table-default table-sm" id="tabelku">
               <thead>
                 <tr class="table-success">
-                  <th scope="col" class="text-center">#</th>
-                  <th scope="col">Nama</th>
-                  <th scope="col">Jabatan</th>
-                  <th scope="col">NRP</th>
-                  <th scope="col">Alamat</th>
-                  <th scope="col">No. HP</th>
-                  <th scope="col" class="text-center">Action</th>
+                  <th scope="col" class="text-center" data-sortable="false">No.</th>
+                  <th scope="col" data-sortable="false">Nama</th>
+                  <th scope="col" data-sortable="false">Jabatan</th>
+                  <th scope="col" data-sortable="false">NRP</th>
+                  <th scope="col" data-sortable="false">Alamat</th>
+                  <th scope="col" data-sortable="false">No. HP</th>
+                  <th scope="col" class="text-center" data-sortable="false">Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -92,6 +92,11 @@
         }
       });
     }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      new simpleDatatables.DataTable("#tabelku", {
+      });
+    });
   </script>
 
 @endsection

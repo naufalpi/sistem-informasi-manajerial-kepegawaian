@@ -16,8 +16,10 @@ return new class extends Migration
         Schema::create('cutis', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->date('tanggal');
-            $table->string('keperluan');
+            $table->date('tgl_mulai');
+            $table->date('tgl_selesai');
+            $table->string('jenis_cuti');
+            $table->string('alasan');
             $table->boolean('status')->nullable();
             $table->timestamps();
         });

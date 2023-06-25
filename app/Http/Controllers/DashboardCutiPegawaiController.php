@@ -15,15 +15,14 @@ class DashboardCutiPegawaiController extends Controller
      */
     public function index()
     {
-
-        setlocale(LC_TIME, 'id_ID');
         Carbon::setLocale('id');
         
         return view('dashboard.cuti.pegawai.index', [
             'cutis' => Cuti::where('user_id', auth()->user()->id)
                 ->latest()
                 ->get()->map(function ($cuti) {
-                    $cuti->tanggal = Carbon::parse($cuti->tanggal)->translatedFormat('d F Y');
+                    $cuti->tgl_mulai = Carbon::parse($cuti->tgl_mulai)->translatedFormat('d F Y');
+                    $cuti->tgl_selesai = Carbon::parse($cuti->tgl_selesai)->translatedFormat('d F Y');
                     return $cuti;
                 }),
         ]);
@@ -48,8 +47,10 @@ class DashboardCutiPegawaiController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'tanggal' => 'required|date',
-            'keperluan' => 'required|string|max:255',
+            'tgl_mulai' => 'required|date',
+            'tgl_selesai' => 'required|date',
+            'jenis' => 'required|string|max:255',
+            'alasan' => 'required|string|max:255'
         ]);
 
         $validatedData['user_id'] = auth()->user()->id;

@@ -40,6 +40,38 @@
                 @enderror
               </div>
               <div class="mb-3">
+                <label for="durasi" class="form-label">Durasi</label>
+                <input type="time" class="form-control @error('durasi') is-invalid @enderror" id="durasi" name="durasi" required value="{{ old('durasi') }}">
+                @error('durasi')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                @enderror
+              </div>
+              <div class="mb-3">
+                <label for="status" class="form-label">Status</label>
+                <select class="form-select @error('status') is-invalid @enderror" id="status" name="status" required>
+                  <option value="">Pilih Status</option>
+                  <option value="Selesai">Selesai</option>
+                  <option value="Sedang berlangsung">Sedang berlangsung</option>
+                  <option value="Tertunda">Tertunda</option>
+                </select>
+                @error('status')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                @enderror
+              </div>
+              <div class="mb-3">
+                <label for="lokasi" class="form-label">Lokasi</label>
+                <input type="text" class="form-control  @error('lokasi') is-invalid @enderror" id="lokasi" name="lokasi" required autofocus value="{{ old('lokasi') }}">
+                @error('lokasi')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                @enderror
+              </div>
+              <div class="mb-3">
                 <label for="file" class="form-label  @error('file') is-invalid @enderror">Upload File PDF</label>
                 <input class="form-control" type="file" id="file" name="file">
                 @error('file')

@@ -23,7 +23,8 @@ class DashboardCutiAdminController extends Controller
             'cutis' => Cuti::with('user')
                 ->latest()
                 ->get()->map(function ($cuti) {
-                    $cuti->tanggal = Carbon::parse($cuti->tanggal)->translatedFormat('d F Y');
+                    $cuti->tgl_mulai = Carbon::parse($cuti->tgl_mulai)->translatedFormat('d F Y');
+                    $cuti->tgl_selesai = Carbon::parse($cuti->tgl_selesai)->translatedFormat('d F Y');
                     return $cuti;
                 }),
         ]);

@@ -19,6 +19,9 @@ return new class extends Migration
             $table->date('tanggal');
             $table->string('kegiatan');
             $table->string('slug')->unique();
+            $table->time('durasi');
+            $table->string('status');
+            $table->string('lokasi');
             $table->string('file')->nullable();
             $table->text('keterangan');
             $table->timestamp('published_at')->nullable();

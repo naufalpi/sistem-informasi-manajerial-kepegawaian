@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use Carbon\CarbonInterval;
 use App\Models\Report;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 
@@ -18,8 +20,6 @@ class DashboardReportController extends Controller
      */
     public function index()
     {
-
-        setlocale(LC_TIME, 'id_ID');
         Carbon::setLocale('id');
 
 
@@ -29,6 +29,7 @@ class DashboardReportController extends Controller
                 ->get()
                 ->map(function ($report) {
                     $report->tanggal = Carbon::parse($report->tanggal)->translatedFormat('d F Y');
+                    $report->durasi = CarbonInterval::hours($report->durasi)->cascade()->forHumans(['join' => true, 'shortUnit' => false]);
                     return $report;
                 }),
         ]);
@@ -57,6 +58,9 @@ class DashboardReportController extends Controller
             'kegiatan' => 'required|max:255',
             'slug' => 'required|unique:reports',
             'tanggal' => 'required',
+            'durasi' => 'required',
+            'status' => 'required',
+            'lokasi' => 'required|max:255',
             'file' => 'file|max:1024|mimes:pdf',
             'keterangan' => 'required'
         ]);
@@ -78,11 +82,34 @@ class DashboardReportController extends Controller
      * @param  \App\Models\Report  $report
      * @return \Illuminate\Http\Response
      */
-    public function show(Report $report)
+    public function show($id)
     {
-        return view('dashboard.reports.show', [
-            'report' => $report
-        ]);
+        // Ambil data yang sesuai dengan ID
+        Carbon::setLocale('id');
+        
+        $report = Report::find($id);
+        
+    
+        // Pastikan data ditemukan
+        if (!$report) {
+            return response()->json(['error' => 'Data tidak ditemukan'], 404);
+        }
+
+        $formattedTanggal = Carbon::parse($report->tanggal)->translatedFormat('d F Y');
+        $formattedDurasi = CarbonInterval::hours($report->durasi)->cascade()->forHumans(['join' => true, 'shortUnit' => false]);
+    
+        // Format data yang akan dikirimkan
+        $data = [
+            'tanggal' => $formattedTanggal,
+            'kegiatan' => $report->kegiatan,
+            'status' => $report->status,
+            'durasi' => $formattedDurasi,
+            'lokasi' => $report->lokasi,
+            'file' => asset('storage/' . $report->file),
+            'keterangan' => $report->keterangan
+        ];
+    
+        return response()->json($data);
     }
 
     /**
@@ -109,9 +136,11 @@ class DashboardReportController extends Controller
     {
         $rules = [
             'kegiatan' => 'required|max:255',
-            'slug' => 'required|unique:reports',
             'tanggal' => 'required',
-            'file' => 'file|max:1024',
+            'durasi' => 'required',
+            'status' => 'required',
+            'lokasi' => 'required|max:255',
+            'file' => 'file|max:1024|mimes:pdf',
             'keterangan' => 'required'
         ];
 

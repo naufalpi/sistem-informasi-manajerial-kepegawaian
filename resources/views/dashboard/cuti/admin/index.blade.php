@@ -5,7 +5,7 @@
 
 <section class="section">
     <div class="row">
-      <div class="col-lg-8">
+      <div class="col-lg-12">
         
         @if(session()->has('success'))
           <script>
@@ -26,25 +26,29 @@
           <div class="card-body">
             <h5 class="card-title">Daftar Pengajuan Cuti</h5>
             
-            <table class="table table-borderless datatable">
+            <table class="table table-borderless table-sm" id="tabelku">
               <thead>
-                <tr class="table-primary">
-                  <th scope="col">#</th>
-                  <th scope="col">Nama</th>
+                <tr class="table-primary" style="font-size: 13px;">
+                  <th scope="col" data-sortable="false" class="text-center">No</th>
+                  <th scope="col"  data-sortable="false" class="tengah">Nama</th>
                   <th scope="col" class="hide-on-mobile">Jabatan</th>
-                  <th scope="col">Tanggal</th>
-                  <th scope="col">Keperluan</th>
-                  <th scope="col" class="text-center">Aksi</th>
+                  <th scope="col">Tanggal Mulai</th>
+                  <th scope="col">Tanggal Selesai</th>
+                  <th scope="col" data-sortable="false">Jenis Cuti</th>
+                  <th scope="col" data-sortable="false">Alasan</th>
+                  <th scope="col" class="text-center" data-sortable="false">Aksi</th>
                 </tr>
               </thead>
               <tbody>
                 @foreach ($cutis as $cuti)
-                  <tr>
-                    <td>{{ $loop->iteration }}</td>
+                  <tr style="font-size: 12px">
+                    <td class="text-center">{{ $loop->iteration }}</td>
                     <td>{{ $cuti->user->name }}</td>
                     <td class="hide-on-mobile">{{ $cuti->user->jabatan->name }}</td>
-                    <td>{{ $cuti->tanggal }}</td>
-                    <td>{{ $cuti->keperluan }}</td>
+                    <td>{{ $cuti->tgl_mulai }}</td>
+                    <td>{{ $cuti->tgl_selesai }}</td>
+                    <td>{{ $cuti->jenis_cuti }}</td>
+                    <td>{{ $cuti->alasan }}</td>
                     <td class="text-center">
                         @if (is_null($cuti->status))
                             <div class="button-container">
@@ -123,6 +127,11 @@
                 });
             });
         });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+      new simpleDatatables.DataTable("#tabelku", {
+      });
     });
 </script>
 

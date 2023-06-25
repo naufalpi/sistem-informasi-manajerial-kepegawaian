@@ -15,7 +15,7 @@
                   <div class="card-body">
                     <h5 class="card-title">Log Activity</h5>
   
-                    <table class="table  datatable table-sm" id="reportsTable">
+                    <table class="table table-sm" id="tabelku">
                       <thead>
                         <tr>
                           <th scope="col">No</th>
@@ -68,6 +68,14 @@
 
 </section>
 
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    new simpleDatatables.DataTable("#tabelku", {
+      searchable: false,
+      perPageSelect: false
+    });
+  });
+</script>
 
 @endsection
 

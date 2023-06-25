@@ -27,7 +27,7 @@
                 <div class="card-body">
                   <h5 class="card-title">Daftar Umur Perangkat Desa Wanakarsa</h5>
             
-                  <table class="datatable">
+                  <table class="table table-borderless" id="tabelku">
                     <thead>
                       <tr>
                         <th scope="col" data-sortable="false">#</th>
@@ -55,6 +55,15 @@
         </div>
     </div>
 </section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    new simpleDatatables.DataTable("#tabelku", {
+      searchable: false,
+      perPageSelect: false
+    });
+  });
+</script>
 
 @endsection
 

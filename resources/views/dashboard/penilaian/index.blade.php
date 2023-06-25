@@ -28,12 +28,12 @@
         <div class="card-body">
           <h5 class="card-title"></h5>
     
-          <table class="table table-striped datatable small">
+          <table class="table table-striped small" id="tabelku">
             <thead>
               <tr>
                 <th class="text-center" scope="col" data-sortable="false">No.</th>
                 <th scope="col" data-sortable="false">Judul</th>
-                <th class="text-center" scope="col">Semester</th>
+                <th class="text-center" scope="col" data-sortable="false">Semester</th>
                 <th scope="col">Tanggal</th>
                 <th scope="col" class="text-center" data-sortable="false">File</th>
                 <th scope="col" class="text-center" data-sortable="false">Action</th>
@@ -97,6 +97,11 @@
       }
     });
   }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    new simpleDatatables.DataTable("#tabelku", {
+    });
+  });
 </script>
 @endsection
 

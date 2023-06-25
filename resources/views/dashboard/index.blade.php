@@ -32,19 +32,6 @@
 
             <!-- Recent Activity -->
             <div class="card">
-                <div class="filter">
-                    <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                        <h6>Filter</h6>
-                    </li>
-
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                    </ul>
-                </div>
-
 
                 {{-- <div class="card-body">
                     <h5 class="card-title">Aktivitas Terbaru
@@ -104,24 +91,42 @@
                 </div> --}}
 
                 <div class="card-body">
-                    <h5 class="card-title">Aktivitas Terbaru
+                    {{-- <h5 class="card-title">Aktivitas Terbaru
                         <span></span>
                     </h5>
                     <div class="activity">
-                        <table id="tabelku" class="table table-sm datatabel" >
+                        <table id="tabelku" class="table table-borderless table-sm" >
                             <tbody>
                                 @foreach ($activities as $item)
                                     <tr>
-                                        <td>{{ $item->created_at_formatted }}</td>
-                                        <td>
+                                        <td style="font-size: 12px;">{{ $item->created_at_formatted }}</td>
+                                        <td style="font-size: 12px;">
                                             <i class='bi bi-circle-fill activity-badge text-success'></i>
                                         </td>
-                                        <td>{{ $item->description }}</td>
+                                        <td style="font-size: 12px;">{{ $item->description }}</td>
                                     </tr>
                                 @endforeach
                                 
                             </tbody>
                         </table>
+                    </div> --}}
+
+                    <div class="card-bodi">
+
+                        <div>
+        
+                            <h5 class="card-title">Aktivitas Terbaru</h5>
+
+                            @foreach ($activities as $item)
+                            <div class="row" style="font-size: 12px;">
+                                <div class="col-lg-4 col-md-4 label ">{{ $item->created_at_formatted }}</div>
+                                <div class="col-lg-2 col-md-4"><i class='bi bi-circle-fill activity-badge text-success'></i></div>
+                                <div class="col-lg-6 col-md-4">{{ $item->description }}</div>
+                            </div>
+                            @endforeach
+                            
+                        </div>
+        
                     </div>
                 </div>
                 
@@ -131,20 +136,19 @@
         @endcan
 
     </div>
-  </section>
+</section>
  
 
-  <script>
+<script>
     document.addEventListener("DOMContentLoaded", function () {
-      new simpleDatatables.DataTable(".datatabel", {
-        "searching": false
+      new simpleDatatables.DataTable("#tabelku", {
+        searchable: false,
+        perPageSelect: false,
+        perPage: 5
       });
     });
 
-    $('#tabelku').dataTable( {
-    "searching": false
-    } );
-    </script>
+</script>
     
 
 @endsection

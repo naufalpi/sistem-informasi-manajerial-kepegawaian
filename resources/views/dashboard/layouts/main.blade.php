@@ -70,6 +70,22 @@
         outline: none;
       }
 
+      .card-bodi {
+        max-height: 350px; /* Atur tinggi tetap sesuai keinginan */
+        overflow-x: hidden;
+        overflow-y: auto;
+      }
+
+      /* Gaya khusus untuk scrollbar horizontal */
+      .card-bodi::-webkit-scrollbar {
+        display: none;
+      }
+      
+      .tengah {
+        padding: 70px 0;
+        text-align: center;
+      }
+
     </style>
 
 
