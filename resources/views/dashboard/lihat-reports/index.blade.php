@@ -95,6 +95,263 @@
             </div>
         </div>
 
+        <div class="col-lg-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Laporan Bulanan</h5>
+
+              <!-- Line Chart -->
+              <canvas id="lineChart" style="max-height: 400px;"></canvas>
+              <script>
+                document.addEventListener("DOMContentLoaded", () => {
+                    const monthlyData = @json($monthlyData); // Menyimpan data dari controller ke variabel JavaScript
+            
+                    const labels = monthlyData.map(data => {
+                        const month = data.month;
+                        const indonesianMonths = {
+                            'January': 'Januari',
+                            'February': 'Februari',
+                            'March': 'Maret',
+                            'April': 'April',
+                            'May': 'Mei',
+                            'June': 'Juni',
+                            'July': 'Juli',
+                            'August': 'Agustus',
+                            'September': 'September',
+                            'October': 'Oktober',
+                            'November': 'November',
+                            'December': 'Desember'
+                        };
+                        return indonesianMonths[month];
+                    });
+            
+                    const data = monthlyData.map(data => data.total);
+            
+                    new Chart(document.querySelector('#lineChart'), {
+                        type: 'line',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: 'Jumlah Laporan',
+                                data: data,
+                                fill: false,
+                                borderColor: 'rgb(75, 192, 192)',
+                                tension: 0.1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+                });
+              </script>
+              <!-- End Line CHart -->
+
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="card">
+              <div class="card-body">
+                  <h5 class="card-title">Durasi Kerja antar Pegawai</h5>
+      
+                  <!-- Bar Chart -->
+                  <canvas id="barChart" style="max-height: 400px;"></canvas>
+                  <script>
+                    document.addEventListener("DOMContentLoaded", () => {
+                      const employeeData = @json($employeeData); // Menyimpan data dari controller ke variabel JavaScript
+            
+                      const labels = employeeData.map(data => data.name);
+                      const durationsInSeconds = employeeData.map(data => data.total_duration);
+            
+                      // Fungsi untuk mengubah total durasi dalam detik menjadi format "HH Jam MM Menit"
+                      function formatDuration(totalSeconds) {
+                        const hours = Math.floor(totalSeconds / 3600);
+                        const minutes = Math.floor((totalSeconds % 3600) / 60);
+            
+                        return `${hours} Jam`;
+                      }
+
+                      function formatDuration2(totalSeconds) {
+                        const hours = Math.floor(totalSeconds / 3600);
+                        const minutes = Math.floor((totalSeconds % 3600) / 60);
+            
+                        return `${hours} Jam ${minutes} Menit`;
+                      }
+
+                      function tooltipCallback(context) {
+                        const index = context.dataIndex;
+                        const totalDuration = durationsInSeconds[index];
+                        const numReports = employeeData[index].num_reports;
+
+                        return [
+                          `Jumlah laporan pekerjaan: ${numReports}`,
+                          `Total durasi pekerjaan: ${formatDuration2(totalDuration)}`
+                        ];
+                      }
+            
+                      new Chart(document.querySelector('#barChart'), {
+                        type: 'bar',
+                        data: {
+                          labels: labels,
+                          datasets: [{
+                            label: 'Total Durasi Kerja',
+                            data: durationsInSeconds,
+                            backgroundColor: [
+                              'rgba(255, 99, 132, 0.2)',
+                              'rgba(255, 159, 64, 0.2)',
+                              'rgba(255, 205, 86, 0.2)',
+                              'rgba(75, 192, 192, 0.2)',
+                              'rgba(54, 162, 235, 0.2)',
+                              'rgba(153, 102, 255, 0.2)',
+                              'rgba(201, 203, 207, 0.2)'
+                            ],
+                            borderColor: [
+                              'rgb(255, 99, 132)',
+                              'rgb(255, 159, 64)',
+                              'rgb(255, 205, 86)',
+                              'rgb(75, 192, 192)',
+                              'rgb(54, 162, 235)',
+                              'rgb(153, 102, 255)',
+                              'rgb(201, 203, 207)'
+                            ],
+                            borderWidth: 1
+                          }]
+                        },
+                        options: {
+                          scales: {
+                            y: {
+                              beginAtZero: true,
+                              ticks: {
+                                callback: function (value) {
+                                  return formatDuration(value); // Menggunakan fungsi untuk mengubah format durasi
+                                }
+                              }
+                            }
+                          },
+                          plugins: {
+                            tooltip: {
+                              callbacks: {
+                                label: function (context) {
+                                  const value = context.parsed.y;
+                                  return tooltipCallback(context); // Menggunakan fungsi untuk mengubah format durasi pada tooltip
+                                }
+                              }
+                            }
+                          }
+                        }
+                      });
+                    });
+                  </script>
+                  <!-- End Bar Chart -->
+      
+              </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Lokasi Paling Sering Digunakan</h5>
+        
+              <!-- Bubble Chart -->
+              <canvas id="bubbleChart" style="max-height: 400px;"></canvas>
+              <script>
+                document.addEventListener("DOMContentLoaded", () => {
+                  const locationData = @json($locationData);
+              
+                  const bubbleData = locationData.map(location => {
+                    return {
+                      x: location.usage_count,
+                      y: location.usage_count,
+                      r: location.usage_count
+                    };
+                  });
+              
+                  new Chart(document.querySelector('#bubbleChart'), {
+                    type: 'bubble',
+                    data: {
+                      labels: locationData.map(location => location.label),
+                      datasets: [{
+                        label: 'Lokasi',
+                        data: bubbleData,
+                        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                        borderColor: 'rgb(255, 99, 132)'
+                      }]
+                    },
+                    options: {
+                      responsive: true,
+                      plugins: {
+                        legend: {
+                          position: 'top'
+                        },
+                      },
+                      tooltips: {
+                        callbacks: {
+                          label: function (context) {
+                            var label = context.dataset.label || '';
+                            if (label) {
+                              label += ': ';
+                            }
+                            if (context.parsed.y !== null) {
+                              label += context.parsed.y + ' kali';
+                            }
+                            return label;
+                          }
+                        }
+                      }
+                    }
+                  });
+                });
+              </script>
+            </div>
+          </div>
+        </div>
+        
+       
+        
+      
+
+        <div class="col-lg-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Status Laporan</h5>
+
+              <!-- Pie Chart -->
+              <canvas id="pieChart" style="max-height: 260px;"></canvas>
+              <script>
+                document.addEventListener("DOMContentLoaded", () => {
+                    const statusData = @json($statusData); // Menyimpan data dari controller ke variabel JavaScript
+            
+                    const labels = statusData.map(data => data.status);
+                    const data = statusData.map(data => data.total);
+                    const backgroundColor = ['rgb(255, 205, 86)', 'rgb(54, 162, 235)', 'rgb(255, 99, 132)'];
+            
+                    new Chart(document.querySelector('#pieChart'), {
+                        type: 'pie',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: 'Jumlah Laporan',
+                                data: data,
+                                backgroundColor: backgroundColor,
+                                hoverOffset: 4
+                            }]
+                        }
+                    });
+                });
+              </script>
+              <!-- End Pie CHart -->
+
+            </div>
+          </div>
+        </div>
+
 
     </div>
 

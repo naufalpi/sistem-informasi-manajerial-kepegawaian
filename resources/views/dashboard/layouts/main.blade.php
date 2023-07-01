@@ -71,7 +71,7 @@
       }
 
       .card-bodi {
-        max-height: 350px; /* Atur tinggi tetap sesuai keinginan */
+        max-height: 250px; /* Atur tinggi tetap sesuai keinginan */
         overflow-x: hidden;
         overflow-y: auto;
       }

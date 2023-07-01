@@ -4,6 +4,12 @@
 
 <section class="section">
     <div class="row">
+      <div class="col-lg-10">
+        
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <a href="/dashboard/mutasi/create" class="btn btn-primary mb-3">Buat Surat Kepensiunan</a>
+       </div>
+    
         <div class="col-lg-8">
             @if(session()->has('success'))
                 <script>
@@ -19,31 +25,31 @@
                 </script>
             @endif
 
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-              <a href="/dashboard/kepensiunan/create" class="btn btn-primary mb-3">Buat Surat Kepensiunan</a>
-            </div>
+            {{-- <div class="d-flex flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+              <a href="/dashboard/kepensiunan/create" class="btn btn-primary mb-3 ml-2"><i class="bx bxs-plus-square"></i></a>
+            </div> --}}
             
             <div class="card">
                 <div class="card-body">
                   <h5 class="card-title">Daftar Umur Perangkat Desa Wanakarsa</h5>
             
-                  <table class="table table-borderless" id="tabelku">
+                  <table class="table table-borderless small" id="tabelku">
                     <thead>
                       <tr>
-                        <th scope="col" data-sortable="false">#</th>
+                        <th class="text-center" scope="col" data-sortable="false">No.</th>
                         <th scope="col">Nama</th>
                         <th scope="col">Jabatan</th>
-                        <th class="text-center" scope="col">Umur</th>
+                        <th scope="col">Umur</th>
                      
                       </tr>
                     </thead>
                     <tbody>
                       @foreach ($users as $pegawai)
                         <tr>
-                          <td>{{ $loop->iteration }}</td>
+                          <td class="text-center">{{ $loop->iteration }}</td>
                           <td>{{ $pegawai->name }}</td>
                           <td>{{ $pegawai->jabatan->name }}</td>
-                          <td class="text-center">{{ $pegawai->umur }} Tahun</td>
+                          <td>{{ $pegawai->umur }} Tahun</td>
                         </tr>
                       @endforeach
                     </tbody>
@@ -60,7 +66,8 @@
   document.addEventListener("DOMContentLoaded", function () {
     new simpleDatatables.DataTable("#tabelku", {
       searchable: false,
-      perPageSelect: false
+      perPageSelect: false,
+      perPage: 15
     });
   });
 </script>

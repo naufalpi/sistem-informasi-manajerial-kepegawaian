@@ -4,11 +4,11 @@
 
 <section class="section">
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-10">
 
             <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">Form Kepensiunan Pegawai</h5>
+                  <h5 class="card-title">Form Kepensiunan Pegawai: Batas Usia</h5>
     
                   <form method="post" action="/dashboard/kepensiunan" class="mb-5">
                     @csrf
@@ -54,6 +54,17 @@
                                 {{ $message }}
                                 </div>
                             @enderror
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="penyebab" class="col-sm-2 col-form-label">Penyebab</label>
+                        <div class="col-sm-10">
+                            <select class="form-select" name="penyebab">
+                                <option value="habis masa jabatannya">Batas Usia</option>
+                                <option value="mengambil keputusan untuk keluar dari jabatannya">Pensiun Dini</option>
+                                <option value="melakukan tindakan asusila">Diberhentikan</option>
+                                <option value="meninggal dunia">Meninggal Dunia</option>
+                            </select>
                         </div>
                     </div>
                     <div class="row mb-3">

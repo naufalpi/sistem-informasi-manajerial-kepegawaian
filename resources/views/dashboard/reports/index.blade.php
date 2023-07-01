@@ -6,6 +6,26 @@
   <div class="row">
     <div class="col-lg-12">
      
+
+       <!-- Kode SweetAlert -->
+       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+       <script>
+           function showDataModal(nama, jabatan, pengajuanCuti, pengajuanDiterima, pengajuanDitolak) {
+               Swal.fire({
+                   title: 'Data Pengajuan Cuti Pegawai',
+                   html: `
+                       <p><strong>Nama:</strong> ${nama}</p>
+                       <p><strong>Jabatan:</strong> ${jabatan}</p>
+                       <p><strong>Jumlah Pengajuan Cuti:</strong> ${pengajuanCuti}</p>
+                       <p><strong>Pengajuan Diterima:</strong> ${pengajuanDiterima}</p>
+                       <p><strong>Pengajuan Ditolak:</strong> ${pengajuanDitolak}</p>
+                   `,
+                   icon: 'info',
+                   confirmButtonText: 'OK'
+               });
+           }
+       </script>
+       <!-- Akhir Kode SweetAlert -->
       @if(session()->has('success'))
         <script>
           document.addEventListener('DOMContentLoaded', function() {

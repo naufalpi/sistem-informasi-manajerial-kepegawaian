@@ -49,7 +49,7 @@ class DashboardCutiPegawaiController extends Controller
         $validatedData = $request->validate([
             'tgl_mulai' => 'required|date',
             'tgl_selesai' => 'required|date',
-            'jenis' => 'required|string|max:255',
+            'jenis_cuti' => 'required|string|max:255',
             'alasan' => 'required|string|max:255'
         ]);
 

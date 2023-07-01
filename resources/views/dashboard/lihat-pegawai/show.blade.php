@@ -79,7 +79,7 @@
 
 @push('scripts')
     @php
-        $pageTitle = 'Kelola Data Pegawai';
-        $breadcrumbItem = 'Kelola Data Pegawai / Detail Data Pegawai';
+        $pageTitle = 'Lihat Data Pegawai';
+        $breadcrumbItem = 'Lihat Data Pegawai / Detail Data Pegawai';
     @endphp
 @endpush

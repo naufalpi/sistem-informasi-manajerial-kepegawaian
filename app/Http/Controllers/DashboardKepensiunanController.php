@@ -18,19 +18,21 @@ class DashboardKepensiunanController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        $now = Carbon::now(); // Mendapatkan tanggal dan waktu saat ini
-    
-        foreach ($users as $user) {
-            $tgl_lahir = \Carbon\Carbon::parse($user->tgl_lahir); // Mengubah string tanggal lahir menjadi objek Carbon
-            $umur = $now->diffInYears($tgl_lahir); // Menghitung selisih tahun antara tanggal lahir dan tanggal saat ini
-    
-            // Tambahkan properti baru "umur" ke objek pengguna (user)
+        $now = Carbon::now(); // Get the current date and time
+
+        $users = User::all()->map(function ($user) use ($now) {
+            $tgl_lahir = Carbon::parse($user->tgl_lahir); // Convert the birthdate string to a Carbon object
+            $umur = $now->diffInYears($tgl_lahir); // Calculate the age difference in years
+
+            // Add a new "umur" property to the user object
             $user->umur = $umur;
-        }
-    
+
+            return $user;
+        })->sortByDesc('umur'); // Sort the users by the "umur" property in descending order
+
         return view('dashboard.kepensiunan.index', compact('users'));
     }
+
     
 
     /**
@@ -44,7 +46,6 @@ class DashboardKepensiunanController extends Controller
             'jabatans' => Jabatan::where('id', '!=', 1)->get(),
             'kades' => User::where('jabatan_id', 1)->pluck('name')->first(),
             'users' => User::where('jabatan_id', '!=', 1)->pluck('name'),
-
         ]);
     }
 
@@ -61,6 +62,7 @@ class DashboardKepensiunanController extends Controller
             'nomor' => 'required|max:255',
             'jml_lampiran' => 'required|max:255',
             'perihal' => 'required|max:255',
+            'penyebab' => 'required|max:255',
             'camat' => 'required|max:255',
             'kepala_desa' => 'required|max:255',
             'nomor_kkd' => 'required|max:255',
@@ -76,6 +78,7 @@ class DashboardKepensiunanController extends Controller
         $kepensiunan->nomor = $request->nomor;
         $kepensiunan->jml_lampiran = $request->jml_lampiran;
         $kepensiunan->perihal = $request->perihal;
+        $kepensiunan->penyebab = $request->penyebab;
         $kepensiunan->camat = $request->camat;
         $kepensiunan->perangkat_desa = $request->perangkat_desa;
         $kepensiunan->kepala_desa = $request->kepala_desa;

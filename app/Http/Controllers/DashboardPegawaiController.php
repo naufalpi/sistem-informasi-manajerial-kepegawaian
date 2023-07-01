@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Jabatan;
+use Carbon\Carbon;
 use App\Models\Pendidikan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -20,6 +21,9 @@ class DashboardPegawaiController extends Controller
      */
     public function index()
     {
+        Carbon::setLocale('id');
+       
+
         return view('dashboard.pegawai.index', [
             'users' => User::with('jabatan')
                 ->leftJoin('jabatans', 'users.jabatan_id', '=', 'jabatans.id')

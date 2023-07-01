@@ -43,8 +43,8 @@
                 @foreach ($cutis as $cuti)
                   <tr style="font-size: 12px">
                     <td class="text-center">{{ $loop->iteration }}</td>
-                    <td>{{ $cuti->user->name }}</td>
-                    <td class="hide-on-mobile">{{ $cuti->user->jabatan->name }}</td>
+                    <td>{{ $cuti->user ? $cuti->user->name : 'N/A' }}</td>
+                    <td class="hide-on-mobile">{{ $cuti->user && $cuti->user->jabatan ? $cuti->user->jabatan->name : 'N/A' }}</td>
                     <td>{{ $cuti->tgl_mulai }}</td>
                     <td>{{ $cuti->tgl_selesai }}</td>
                     <td>{{ $cuti->jenis_cuti }}</td>

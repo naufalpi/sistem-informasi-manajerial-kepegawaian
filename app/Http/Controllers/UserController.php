@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class UserController extends Controller
 {
@@ -13,11 +14,16 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
-        $user = Auth::user(); 
+        Carbon::setLocale('id');
+
+        $user = Auth::user();
+        $user->tgl_lahir = Carbon::parse($user->tgl_lahir)->translatedFormat('d F Y');
         return view('dashboard.profiles.index', compact('user'));
     }
+
 
     /**
      * Show the form for creating a new resource.
