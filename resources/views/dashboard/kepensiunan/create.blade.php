@@ -4,11 +4,11 @@
 
 <section class="section">
     <div class="row">
-        <div class="col-lg-10">
+        <div class="col-lg-12">
 
             <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">Form Kepensiunan Pegawai: Batas Usia</h5>
+                  <h5 class="card-title">Form Kepensiunan Pegawai</h5>
     
                   <form method="post" action="/dashboard/kepensiunan" class="mb-5">
                     @csrf
@@ -164,6 +164,6 @@
 @push('scripts')
     @php
         $pageTitle = 'Kelola Kepensiunan Pegawai';
-        $breadcrumbItem = 'Kelola Kepensiunan Pegawai';
+        $breadcrumbItem = 'Kelola Kepensiunan Pegawai / Buat Surat Kepensiunan';
     @endphp
 @endpush

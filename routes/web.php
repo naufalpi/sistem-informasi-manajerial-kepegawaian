@@ -21,6 +21,8 @@ use App\Http\Controllers\DashboardLihatReportController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DashboardLihatCutiController;
 use App\Http\Controllers\DashboardLihatDataPegawaiController;
+use App\Http\Controllers\DashboardKelolaPresensiController;
+use App\Http\Controllers\DashboardLihatPresensiController;
 
 
 /*
@@ -48,9 +50,6 @@ Route::get('/', function () {
 
 
 
-
-
-
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout']);
@@ -58,12 +57,18 @@ Route::post('/logout', [LoginController::class, 'logout']);
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
+    Route::get('/dashboard/reports/checkSlug', [DashboardReportController::class, 'checkSlug']);
+    Route::resource('/dashboard/reports', DashboardReportController::class);
+    Route::resource('/dashboard/profiles', UserController::class);
+    Route::resource('/dashboard/cuti/pegawai', DashboardCutiPegawaiController::class);
+    Route::get('/dashboard/presensi', [DashboardPresensiController::class, 'index'])->name('dashboard.presensi.index');
+    Route::post('/dashboard/presensi', [DashboardPresensiController::class, 'presensi'])->name('dashboard.presensi.presensi');
 
-Route::get('/dashboard/reports/checkSlug', [DashboardReportController::class, 'checkSlug'])->middleware('auth');
-Route::resource('/dashboard/reports', DashboardReportController::class)->middleware('auth');
-
+    Route::resource('/dashboard/log-activity', LogActivityController::class);
+});
 
 Route::middleware(['kades'])->group(function () {
     Route::get('/dashboard/lihat-reports', [DashboardLihatReportController::class, 'index'])->name('dashboard.lihat-reports.index');
@@ -71,38 +76,24 @@ Route::middleware(['kades'])->group(function () {
     Route::get('/dashboard/lihat-reports/checkSlug', [DashboardLihatReportController::class, 'checkSlug']);
     Route::get('/dashboard/lihat-cuti', [DashboardLihatCutiController::class, 'index'])->name('dashboard.lihat-cuti.index');
     Route::resource('/dashboard/lihat-pegawai', DashboardLihatDataPegawaiController::class);
+    Route::resource('/dashboard/lihat-presensi', DashboardLihatPresensiController::class);
+    Route::resource('/dashboard/penilaian', DashboardPenilaianController::class);
 });
 
-Route::get('/dashboard/categories/checkSlug', [AdminCategoryController::class, 'checkSlug'])->middleware('admin');
-Route::resource('/dashboard/categories', AdminCategoryController::class)->except('show')->middleware('admin');
-
-Route::resource('/dashboard/profiles', UserController::class)->middleware('auth');
-Route::resource('/dashboard/pegawai', DashboardPegawaiController::class)->middleware('sekdes');
-
-Route::resource('/dashboard/cuti/pegawai', DashboardCutiPegawaiController::class)->middleware('auth');
-
 Route::middleware(['sekdes'])->group(function () {
+    Route::resource('/dashboard/pegawai', DashboardPegawaiController::class);
     Route::resource('/dashboard/cuti/admin', DashboardCutiAdminController::class)->except(['approve', 'reject']);
     Route::put('/dashboard/cuti/admin/{cuti}/approve', [DashboardCutiAdminController::class, 'approve'])->name('cuti.approve');
     Route::put('/dashboard/cuti/admin/{cuti}/reject', [DashboardCutiAdminController::class, 'reject'])->name('cuti.reject');
+    Route::resource('/dashboard/kepensiunan', DashboardKepensiunanController::class);
+    Route::resource('/dashboard/mutasi', DashboardMutasiController::class);
+
+    Route::get('/dashboard/kelola-presensi', [DashboardKelolaPresensiController::class, 'index'])->name('dashboard.kelola-presensi.index');
+    Route::get('/dashboard/kelola-presensi/show', [DashboardKelolaPresensiController::class, 'show'])->name('dashboard.kelola-presensi.show');
+    Route::post('/dashboard/kelola-presensi/buka', [DashboardKelolaPresensiController::class, 'buka'])->name('dashboard.kelola-presensi.buka');
+   
+
 });
-
-Route::resource('/dashboard/mutasi', DashboardMutasiController::class)->middleware('sekdes');
-
-Route::middleware(['sekdes'])->group(function () {
-    Route::resource('/dashboard/kepensiunan', DashboardKepensiunanController::class)->middleware('sekdes');
-    
-});
-
-Route::middleware(['sekdes'])->group(function () {
-    Route::get('/dashboard/kelola-presensi', [DashboardPresensiController::class, 'showAdminView']);
-    Route::post('/dashboard/buka-presensi', [DashboardPresensiController::class, 'bukaPresensi']);
-});
-
-Route::resource('/dashboard/penilaian', DashboardPenilaianController::class)->middleware('kades');
-
-Route::get('/dashboard/presensi', [DashboardPresensiController::class, 'showPresensiView'])->middleware('auth');
-Route::resource('/dashboard/log-activity', LogActivityController::class)->middleware('sekdes');
 
 
 

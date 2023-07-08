@@ -21,70 +21,70 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Jabatan::create([
-            'name' => 'Kepala Desa'
-        ]);
+        // Jabatan::create([
+        //     'name' => 'Kepala Desa'
+        // ]);
 
-        Jabatan::create([
-            'name' => 'Sekretaris Desa'
-        ]);
+        // Jabatan::create([
+        //     'name' => 'Sekretaris Desa'
+        // ]);
 
-        Jabatan::create([
-            'name' => 'Kasi Pemerintahan'
-        ]);
+        // Jabatan::create([
+        //     'name' => 'Kasi Pemerintahan'
+        // ]);
 
-        Jabatan::create([
-            'name' => 'Kasi Kesejahteraan Rakyat'
-        ]);
+        // Jabatan::create([
+        //     'name' => 'Kasi Kesejahteraan Rakyat'
+        // ]);
 
-        Jabatan::create([
-            'name' => 'Kasi Pelayanan'
-        ]);
+        // Jabatan::create([
+        //     'name' => 'Kasi Pelayanan'
+        // ]);
 
-        Jabatan::create([
-            'name' => 'Kaur Keuangan'
-        ]);
+        // Jabatan::create([
+        //     'name' => 'Kaur Keuangan'
+        // ]);
 
-        Jabatan::create([
-            'name' => 'Kaur Perencanaan'
-        ]);
+        // Jabatan::create([
+        //     'name' => 'Kaur Perencanaan'
+        // ]);
 
-        Jabatan::create([
-            'name' => 'Kaur Tata Usaha & Umum'
-        ]);
+        // Jabatan::create([
+        //     'name' => 'Kaur Tata Usaha & Umum'
+        // ]);
 
-        Jabatan::create([
-            'name' => 'Kadus 1'
-        ]);
+        // Jabatan::create([
+        //     'name' => 'Kadus 1'
+        // ]);
 
-        Jabatan::create([
-            'name' => 'Kadus 2'
-        ]);
+        // Jabatan::create([
+        //     'name' => 'Kadus 2'
+        // ]);
 
-        Jabatan::create([
-            'name' => 'Staff'
-        ]);
+        // Jabatan::create([
+        //     'name' => 'Staff'
+        // ]);
 
-        Pendidikan::create([
-            'name' => 'SLTP'
-        ]);
+        // Pendidikan::create([
+        //     'name' => 'SLTP'
+        // ]);
 
-        Pendidikan::create([
-            'name' => 'SLTA'
-        ]);
+        // Pendidikan::create([
+        //     'name' => 'SLTA'
+        // ]);
 
-        Pendidikan::create([
-            'name' => 'S1'
-        ]);
+        // Pendidikan::create([
+        //     'name' => 'S1'
+        // ]);
 
-        Pendidikan::create([
-            'name' => 'S2'
-        ]);
+        // Pendidikan::create([
+        //     'name' => 'S2'
+        // ]);
 
 
         User::create([
             'jabatan_id' => '1',
-            'pendidikan_id' => mt_rand(1,4),
+            'pendidikan_id' => '3',
             'name' => 'Naufal Akbar',
             'username' => 'naufalpi',
             'nrp' => fake()->unique()->randomNumber(9, true),
@@ -97,58 +97,58 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('12345')
         ]);
 
-        
-
-
-        User::factory(11)->create();
-
-
-        Category::create([
-            'name' => 'Web Programming',
-            'slug' => 'web-programming'
-        ]);
-
-        Category::create([
-            'name' => 'Personal',
-            'slug' => 'personal'
-        ]);
-        
-        Category::create([
-            'name' => 'Web Design',
-            'slug' => 'web-design'
+        User::create([
+            'jabatan_id' => '2',
+            'pendidikan_id' =>'3',
+            'name' => 'Annisa Nabila',
+            'username' => 'anisana',
+            'nrp' => fake()->unique()->randomNumber(9, true),
+            'tpt_lahir' => fake()->city(),
+            'tgl_lahir' => fake()->date(),
+            'alamat' => fake()->streetAddress(),
+            'email' => 'anisa@gmail.com',
+            'no_hp' => fake()->phoneNumber(),
+            'email_verified_at' => now(),
+            'password' => bcrypt('12345')
         ]);
 
         
-        Report::factory(15)->create();
 
-        Cuti::create([
-            'user_id' => '1',
-            'tgl_mulai' => fake()->date(),
-            'tgl_selesai' => fake()->date(),
-            'jenis_cuti' => 'Sakit',
-            'alasan' => fake()->paragraph()
-        ]);
-        Cuti::create([
-            'user_id' => '2',
-            'tgl_mulai' => fake()->date(),
-            'tgl_selesai' => fake()->date(),
-            'jenis_cuti' => 'Sakit',
-            'alasan' => fake()->paragraph()
-        ]);
-        Cuti::create([
-            'user_id' => '1',
-            'tgl_mulai' => fake()->date(),
-            'tgl_selesai' => fake()->date(),
-            'jenis_cuti' => 'Cuti Tahunan',
-            'alasan' => fake()->paragraph()
-        ]);
-        Cuti::create([
-            'user_id' => '5',
-            'tgl_mulai' => fake()->date(),
-            'tgl_selesai' => fake()->date(),
-            'jenis_cuti' => 'Melahirkan',
-            'alasan' => fake()->paragraph()
-        ]);
+
+        User::factory(9)->create();
+
+
+        
+        // Report::factory(15)->create();
+
+        // Cuti::create([
+        //     'user_id' => '1',
+        //     'tgl_mulai' => fake()->date(),
+        //     'tgl_selesai' => fake()->date(),
+        //     'jenis_cuti' => 'Sakit',
+        //     'alasan' => fake()->paragraph()
+        // ]);
+        // Cuti::create([
+        //     'user_id' => '2',
+        //     'tgl_mulai' => fake()->date(),
+        //     'tgl_selesai' => fake()->date(),
+        //     'jenis_cuti' => 'Sakit',
+        //     'alasan' => fake()->paragraph()
+        // ]);
+        // Cuti::create([
+        //     'user_id' => '1',
+        //     'tgl_mulai' => fake()->date(),
+        //     'tgl_selesai' => fake()->date(),
+        //     'jenis_cuti' => 'Cuti Tahunan',
+        //     'alasan' => fake()->paragraph()
+        // ]);
+        // Cuti::create([
+        //     'user_id' => '5',
+        //     'tgl_mulai' => fake()->date(),
+        //     'tgl_selesai' => fake()->date(),
+        //     'jenis_cuti' => 'Melahirkan',
+        //     'alasan' => fake()->paragraph()
+        // ]);
 
 
       

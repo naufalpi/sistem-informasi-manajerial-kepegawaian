@@ -18,20 +18,25 @@ class DashboardKepensiunanController extends Controller
      */
     public function index()
     {
-        $now = Carbon::now(); // Get the current date and time
+        $now = Carbon::now(); // Dapatkan tanggal dan waktu saat ini
 
         $users = User::all()->map(function ($user) use ($now) {
-            $tgl_lahir = Carbon::parse($user->tgl_lahir); // Convert the birthdate string to a Carbon object
-            $umur = $now->diffInYears($tgl_lahir); // Calculate the age difference in years
+            if ($user->jabatan_id !== 1) {
+                $tgl_lahir = Carbon::parse($user->tgl_lahir); // Ubah string tanggal lahir menjadi objek Carbon
+                $umur = $now->diffInYears($tgl_lahir); // Hitung selisih umur dalam tahun
 
-            // Add a new "umur" property to the user object
-            $user->umur = $umur;
+                // Tambahkan properti "umur" baru ke objek user
+                $user->umur = $umur;
 
-            return $user;
-        })->sortByDesc('umur'); // Sort the users by the "umur" property in descending order
+                return $user;
+            }
+        })->reject(function ($user) {
+            return is_null($user); // Hapuskan nilai-nilai null dari koleksi
+        })->sortByDesc('umur'); // Urutkan pengguna berdasarkan properti "umur" secara menurun
 
         return view('dashboard.kepensiunan.index', compact('users'));
     }
+
 
     
 

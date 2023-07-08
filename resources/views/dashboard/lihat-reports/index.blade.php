@@ -50,7 +50,8 @@
                           <th scope="col">Nama</th>
                           <th scope="col" data-sortable="false">Jabatan</th>
                           <th scope="col" data-sortable="false">Kegiatan</th>
-                          <th scope="col">Tanggal</th>
+                          <th scope="col">Kategori</th>
+                          <th scope="col" data-sortable="false">Tanggal</th>
                           <th scope="col">Status</th>
                           <th scope="col" data-sortable="false">Lokasi</th>
                           <th scope="col" class="text-center" data-sortable="false">File</th>
@@ -65,6 +66,7 @@
                           <td>{{ $report->user->name }}</td>
                           <td>{{ $report->user->jabatan->name }}</td>
                           <td>{{ $report->kegiatan }}</td>
+                          <td>{{ $report->kategori }}</td>
                           <td>{{ $report->tanggal }}</td>
                           <td>{{ $report->status }}</td>
                           <td>{{ $report->lokasi }}</td>
@@ -95,6 +97,106 @@
             </div>
         </div>
 
+        <div class="col-lg-6">
+          <div class="card">
+              <div class="card-body">
+                  <h5 class="card-title">Jumlah Laporan Kerja per Kategori</h5>
+      
+                  <!-- Bar Chart -->
+                  <div id="barChartt"></div>
+      
+                  <script>
+                      document.addEventListener("DOMContentLoaded", () => {
+                          const categoryData = @json($categoryData);
+
+                          new ApexCharts(document.querySelector("#barChartt"), {
+                              series: [{
+                                  data: categoryData.data
+                              }],
+                              chart: {
+                                  type: 'bar',
+                                  height: 350
+                              },
+                              plotOptions: {
+                                  bar: {
+                                      borderRadius: 4,
+                                      horizontal: true
+                                  }
+                              },
+                              dataLabels: {
+                                  enabled: false
+                              },
+                              xaxis: {
+                                  categories: categoryData.categories
+                              },
+                              tooltip: {
+                                  y: {
+                                      formatter: function (value) {
+                                          return 'Jumlah Laporan: ' + value;
+                                      }
+                                  }
+                              }
+                          }).render();
+                      });
+                  </script>
+                  <!-- End Bar Chart -->
+      
+              </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Durasi Laporan Kerja per Kategori</h5>
+        
+              <!-- Bar Chart -->
+              <div id="barC"></div>
+        
+              <script>
+                document.addEventListener("DOMContentLoaded", () => {
+                  const labels = @json($categoryDurationData['categories']);
+                  const data = @json($categoryDurationData['durations']);
+              
+                  new ApexCharts(document.querySelector("#barC"), {
+                    series: [{
+                      data: data
+                    }],
+                    chart: {
+                      type: 'bar',
+                      height: 350
+                    },
+                    plotOptions: {
+                      bar: {
+                        borderRadius: 4,
+                        horizontal: true,
+                      }
+                    },
+                    dataLabels: {
+                      enabled: false
+                    },
+                    xaxis: {
+                      categories: labels,
+                    },
+                    tooltip: {
+                      y: {
+                        formatter: function(value) {
+                          const minutes = value % 60; // Mendapatkan menit
+              
+                          return value + ' Jam ' + minutes + ' Menit';
+                        }
+                      }
+                    }
+                  }).render();
+                });
+              </script>
+              
+              <!-- End Bar Chart -->
+        
+            </div>
+          </div>
+        </div>
+      
         <div class="col-lg-6">
           <div class="card">
             <div class="card-body">
@@ -158,7 +260,7 @@
         <div class="col-lg-6">
           <div class="card">
               <div class="card-body">
-                  <h5 class="card-title">Durasi Kerja antar Pegawai</h5>
+                  <h5 class="card-title">Durasi Kerja per Minggu</h5>
       
                   <!-- Bar Chart -->
                   <canvas id="barChart" style="max-height: 400px;"></canvas>
@@ -313,17 +415,13 @@
           </div>
         </div>
         
-       
-        
-      
-
         <div class="col-lg-6">
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Status Laporan</h5>
 
               <!-- Pie Chart -->
-              <canvas id="pieChart" style="max-height: 260px;"></canvas>
+              <canvas id="pieChart" style="max-height: 265px;"></canvas>
               <script>
                 document.addEventListener("DOMContentLoaded", () => {
                     const statusData = @json($statusData); // Menyimpan data dari controller ke variabel JavaScript
@@ -351,6 +449,14 @@
             </div>
           </div>
         </div>
+
+       
+        
+        
+        
+      
+        
+        
 
 
     </div>
@@ -389,6 +495,10 @@
                 <div class="row" style="margin-bottom: 7px;">
                   <div class="col-lg-3 col-md-4 label" style="text-align: left; font-size: 20px;">Kegiatan</div>
                   <div class="col-lg-9 col-md-8" style="text-align: left; font-size: 20px; color: black;">${response.kegiatan}</div>
+                </div>
+                <div class="row" style="margin-bottom: 7px;">
+                  <div class="col-lg-3 col-md-4 label" style="text-align: left; font-size: 20px;">Kategori</div>
+                  <div class="col-lg-9 col-md-8" style="text-align: left; font-size: 20px; color: black;">${response.kategori}</div>
                 </div>
                 <div class="row" style="margin-bottom: 7px;">
                   <div class="col-lg-3 col-md-4 label" style="text-align: left; font-size: 20px;">Status</div>

@@ -73,6 +73,11 @@ class User extends Authenticatable
         return $this->hasMany(Cuti::class);
     }
 
+    public function presensi()
+    {
+        return $this->hasMany(Presensi::class);
+    }
+
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()

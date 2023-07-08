@@ -1,8 +1,8 @@
 
   <aside id="sidebar" class="sidebar">
 
+    @can('user')
     <ul class="sidebar-nav " id="sidebar-nav">
-
       <li class="nav-item">
         <a class="nav-link {{ Request::is('dashboard') ? 'active' : '' }}" aria-current="page" href="/dashboard">
             <i class="bi bi-grid-1x2"></i>
@@ -32,12 +32,45 @@
             <i class="bi bi-journal-check"></i>
             Presensi
         </a>
-      </li>
-      
+      </li> 
     </ul>
+    @endcan
+
 
     @can('sekdes')
     <ul class="sidebar-nav " id="sidebar-nav">
+      <li class="nav-item">
+        <a class="nav-link {{ Request::is('dashboard') ? 'active' : '' }}" aria-current="page" href="/dashboard">
+            <i class="bi bi-grid-1x2"></i>
+            Dashboard
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {{ Request::is('dashboard/profiles') ? 'active' : '' }}" aria-current="page" href="/dashboard/profiles">
+            <i class="bi bi-person"></i>
+            Profil Pengguna
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {{ Request::is('dashboard/reports*') ? 'active' : '' }}" href="/dashboard/reports">
+            <i class="bi bi-journal-text"></i>
+            Kelola Laporan Kerja
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {{ Request::is('dashboard/cuti/pegawai*') ? 'active' : '' }}" href="/dashboard/cuti/pegawai">
+            <i class="bi bi-calendar-plus"></i>
+            Ajukan Cuti
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {{ Request::is('dashboard/presensi*') ? 'active' : '' }}" href="/dashboard/presensi">
+            <i class="bi bi-journal-check"></i>
+            Presensi
+        </a>
+      </li> 
+
+      
       <li class="nav-heading">Administrator</li>
       
      
@@ -84,11 +117,16 @@
 
     @can('kades')
     <ul class="sidebar-nav " id="sidebar-nav">
-      <li class="nav-heading">Administrator</li>
+      <li class="nav-item">
+        <a class="nav-link {{ Request::is('dashboard') ? 'active' : '' }}" aria-current="page" href="/dashboard">
+            <i class="bi bi-grid-1x2"></i>
+            Dashboard
+        </a>
+      </li>
       <li class="nav-item">
         <a class="nav-link {{ Request::is('dashboard/lihat-reports*') ? 'active' : '' }}" href="/dashboard/lihat-reports">
             <i class="bi bi-journal-text"></i>
-            Lihat Laporan Kerja
+            Lihat Laporan Pegawai
         </a>
       </li>
       <li class="nav-item">

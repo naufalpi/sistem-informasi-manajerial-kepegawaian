@@ -31,6 +31,18 @@
                 @enderror
               </div>
               <div class="mb-3">
+                <label for="kategori" class="form-label">Kategori</label>
+                <select class="form-select @error('kategori') is-invalid @enderror" id="kategori" name="kategori" required>
+                  <option value="Administrasi">Administrasi</option>
+                  <option value="Pelayanan Masyarakat">Pelayanan Masyarakat</option>
+                  <option value="Pengembangan Desa">Pengembangan Desa</option>
+                  <option value="Koordinasi">Koordinasi</option>
+                  <option value="Pengawasan">Pengawasan</option>
+                  <option value="Komunikasi dan Informasi">Komunikasi dan Informasi</option>
+                  <option value="Pembinaan Masyarakat">Pembinaan Masyarakat</option>
+                </select>
+              </div>
+              <div class="mb-3">
                 <label for="tanggal" class="form-label">Tanggal</label>
                 <input type="date" class="form-control @error('tanggal') is-invalid @enderror" id="tanggal" name="tanggal" required value="{{ old('tanggal') }}">
                 @error('tanggal')
@@ -51,7 +63,6 @@
               <div class="mb-3">
                 <label for="status" class="form-label">Status</label>
                 <select class="form-select @error('status') is-invalid @enderror" id="status" name="status" required>
-                  <option value="">Pilih Status</option>
                   <option value="Selesai">Selesai</option>
                   <option value="Sedang berlangsung">Sedang berlangsung</option>
                   <option value="Tertunda">Tertunda</option>
@@ -126,6 +137,6 @@
 @push('scripts')
     @php
         $pageTitle = 'Kelola Laporan Kerja';
-        $breadcrumbItem = 'Kelola Laporan Kerja';
+        $breadcrumbItem = 'Kelola Laporan Kerja / Tambah Laporan Kerja';
     @endphp
 @endpush

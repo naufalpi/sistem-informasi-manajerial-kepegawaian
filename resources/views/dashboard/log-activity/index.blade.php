@@ -20,7 +20,7 @@
                         <tr>
                           <th scope="col">No</th>
                           <th scope="col">User</th>
-                          <th scope="col">Event</th>
+                          <th scope="col" data-sortable="false">Event</th>
                           <th scope="col" data-sortable="false">Before</th>
                           <th scope="col" data-sortable="false">After</th>
                           <th scope="col" data-sortable="false">Description</th>
@@ -71,8 +71,7 @@
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     new simpleDatatables.DataTable("#tabelku", {
-      searchable: false,
-      perPageSelect: false
+      searchable: false
     });
   });
 </script>

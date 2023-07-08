@@ -43,10 +43,10 @@
                         <label for="jenis_cuti" class="col-sm-2 col-form-label">Jenis Cuti</label>
                         <div class="col-sm-10">
                             <select class="form-select @error('jenis_cuti') is-invalid @enderror" id="jenis_cuti" name="jenis_cuti" required>
-                                <option value="">Pilih Jenis Cuti</option>
                                 <option value="Cuti Tahunan">Cuti Tahunan</option>
                                 <option value="Cuti Sakit">Cuti Sakit</option>
                                 <option value="Cuti Melahirkan">Cuti Melahirkan</option>
+                                <option value="Lainnya">Lainnya</option>
                                 
                             </select>
                             @error('jenis_cuti')
@@ -86,7 +86,7 @@
 
 @push('scripts')
     @php
-        $pageTitle = 'Cuti Pegawai';
-        $breadcrumbItem = 'Cuti Pegawai';
+        $pageTitle = 'Kelola Cuti';
+        $breadcrumbItem = 'Kelola Cuti / Ajukan Cuti';
     @endphp
 @endpush

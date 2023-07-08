@@ -121,7 +121,7 @@
                 <label for="password" class="form-label">Password</label>
                 <div class="form-group">
                   <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" required autofocus value="{{ old('password') }}">
-                  <span id="togglePassword" toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                  <span id="togglePassword" toggle="#password-field" class="fa fa-fw fa-eye-slash field-icon toggle-password"></span>
                 </div>
                 @error('password')
                   <div class="invalid-feedback">
@@ -144,7 +144,7 @@
 <script>
   $(document).ready(function() {
     $('#togglePassword').click(function() {
-      $(this).toggleClass("fa-eye fa-eye-slash");
+      $(this).toggleClass("fa-eye-slash fa-eye");
       var passwordInput = $('#password');
       var passwordFieldType = passwordInput.attr('type');
       var passwordFieldTypeUpdated = passwordFieldType === 'password' ? 'text' : 'password';

@@ -26,7 +26,7 @@
       
             <table class="table table-default table-sm" id="tabelku">
               <thead>
-                <tr class="table-success">
+                <tr class="table-success" style="font-size: 15px;">
                   <th scope="col" class="text-center" data-sortable="false">No.</th>
                   <th scope="col" data-sortable="false">Nama</th>
                   <th scope="col" data-sortable="false">Jabatan</th>
@@ -38,7 +38,7 @@
               </thead>
               <tbody>
                 @foreach ($users as $pegawai)
-                  <tr>
+                  <tr style="font-size: 14px;">
                     <td class="text-center">{{ $loop->iteration }}</td>
                     <td >{{ $pegawai->name }}</td>
                     <td>{{ $pegawai->jabatan_name }}</td>

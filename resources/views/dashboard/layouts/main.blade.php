@@ -25,6 +25,7 @@
     <link href="/css/dashboard/quill/quill.bubble.css" rel="stylesheet">
     <link href="/css/dashboard/remixicon/remixicon.css" rel="stylesheet">
     <link href="/css/dashboard/simple-datatables/style.css" rel="stylesheet">
+
     {{-- <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" type="text/css"> --}}
    
 

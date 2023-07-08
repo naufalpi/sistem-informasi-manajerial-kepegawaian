@@ -5,7 +5,7 @@
 
 <section class="section">
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Edit Data Pegawai</h5>
@@ -101,10 +101,10 @@
                             @enderror
                         </div>
 
-                        <div class="mb-3">
+                        {{-- <div class="mb-3">
                             <img id="preview" src="#" alt="Preview" style="max-width: 200px; height: auto;">
                         </div>
-                        <button type="button" class="btn btn-primary" id="cropBtn">Crop Foto</button>
+                        <button type="button" class="btn btn-primary" id="cropBtn">Crop Foto</button> --}}
 
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
@@ -115,20 +115,14 @@
                             </div>
                             @enderror
                         </div>
-                        {{-- <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
-                            <div class="input-group">
-                            <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" required autofocus value="{{ old('password') }}">
-                            <button type="button" class="btn btn-outline-secondary" id="togglePassword">
-                                <i class="bi bi-eye"></i>
-                            </button>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password Baru</label>
+                            <div class="form-group">
+                                <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password">
+                                <span id="togglePassword" toggle="#password-field" class="fa fa-fw fa-eye-slash field-icon toggle-password"></span>
                             </div>
-                            @error('password')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                            @enderror
-                        </div> --}}
+                    
+                        </div>
                         
                         <button type="submit" class="btn btn-primary">Ubah Data Pegawai</button>
 
@@ -140,44 +134,54 @@
     </div>
 </section>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const input = document.getElementById("foto");
-        const image = document.getElementById("preview");
-        const cropBtn = document.getElementById("cropBtn");
-        const submitBtn = document.getElementById("submitBtn");
-        let cropper;
-  
-        input.addEventListener("change", function(e) {
-            const file = e.target.files[0];
-            const reader = new FileReader();
-  
-            reader.onload = function(event) {
-                image.src = event.target.result;
-  
-                cropper = new Cropper(image, {
-                    aspectRatio: 2 / 3, // Sesuaikan dengan rasio aspek yang Anda inginkan
-                    viewMode: 1, // Sesuaikan mode tampilan yang Anda inginkan
-                    autoCropArea: 0.8 // Sesuaikan ukuran area crop yang Anda inginkan
-                });
-  
-                cropBtn.style.display = "block";
-            };
-  
-            reader.readAsDataURL(file);
-        });
-  
-        cropBtn.addEventListener("click", function() {
-            const canvas = cropper.getCroppedCanvas();
-            const croppedImage = canvas.toDataURL();
-  
-            image.src = croppedImage;
-            cropper.destroy();
-  
-            cropBtn.style.display = "none";
-            submitBtn.style.display = "block";
+    $(document).ready(function() {
+        $('#togglePassword').click(function() {
+        $(this).toggleClass("fa-eye-slash fa-eye");
+        var passwordInput = $('#password');
+        var passwordFieldType = passwordInput.attr('type');
+        var passwordFieldTypeUpdated = passwordFieldType === 'password' ? 'text' : 'password';
+        passwordInput.attr('type', passwordFieldTypeUpdated);
         });
     });
+    // document.addEventListener("DOMContentLoaded", function() {
+    //     const input = document.getElementById("foto");
+    //     const image = document.getElementById("preview");
+    //     const cropBtn = document.getElementById("cropBtn");
+    //     const submitBtn = document.getElementById("submitBtn");
+    //     let cropper;
+  
+    //     input.addEventListener("change", function(e) {
+    //         const file = e.target.files[0];
+    //         const reader = new FileReader();
+  
+    //         reader.onload = function(event) {
+    //             image.src = event.target.result;
+  
+    //             cropper = new Cropper(image, {
+    //                 aspectRatio: 2 / 3, // Sesuaikan dengan rasio aspek yang Anda inginkan
+    //                 viewMode: 1, // Sesuaikan mode tampilan yang Anda inginkan
+    //                 autoCropArea: 0.8 // Sesuaikan ukuran area crop yang Anda inginkan
+    //             });
+  
+    //             cropBtn.style.display = "block";
+    //         };
+  
+    //         reader.readAsDataURL(file);
+    //     });
+  
+    //     cropBtn.addEventListener("click", function() {
+    //         const canvas = cropper.getCroppedCanvas();
+    //         const croppedImage = canvas.toDataURL();
+  
+    //         image.src = croppedImage;
+    //         cropper.destroy();
+  
+    //         cropBtn.style.display = "none";
+    //         submitBtn.style.display = "block";
+    //     });
+    // });
   </script>
 
 @endsection

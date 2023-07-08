@@ -51,7 +51,7 @@
                           @enderror
                         </div>
                         <div class="mb-3">
-                          <label for="file" class="form-label">Upload Laporan Penilaian Kinerja</label>
+                          <label for="file" class="form-label">Upload Laporan Penilaian Kinerja (PDF)</label>
                           <input class="form-control @error('file') is-invalid @enderror" type="file" id="file" name="file">
                           @error('file')
                             <div class="invalid-feedback">

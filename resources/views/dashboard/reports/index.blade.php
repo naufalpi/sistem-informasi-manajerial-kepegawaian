@@ -53,6 +53,7 @@
               <tr>
                 <th scope="col" data-sortable="false" class="text-center">No.</th>
                 <th scope="col" data-sortable="false">Kegiatan</th>
+                <th scope="col">Kategori</th>
                 <th scope="col">Tanggal</th>
                 <th scope="col" data-sortable="false">Status</th>
                 <th scope="col" data-sortable="false">Lokasi</th>
@@ -65,6 +66,7 @@
                 <tr>
                   <td class="text-center">{{ $loop->iteration }}</td>
                   <td>{{ $report->kegiatan }}</td>
+                  <td>{{ $report->kategori}}</td>
                   <td>{{ $report->tanggal }}</td>
                   <td>{{ $report->status }}</td>
                   <td>{{ $report->lokasi }}</td>
@@ -149,6 +151,10 @@
                 <div class="row" style="margin-bottom: 7px;">
                   <div class="col-lg-3 col-md-4 label" style="text-align: left; font-size: 20px;">Kegiatan</div>
                   <div class="col-lg-9 col-md-8" style="text-align: left; font-size: 20px; color: black;">${response.kegiatan}</div>
+                </div>
+                <div class="row" style="margin-bottom: 7px;">
+                  <div class="col-lg-3 col-md-4 label" style="text-align: left; font-size: 20px;">Kegiatan</div>
+                  <div class="col-lg-9 col-md-8" style="text-align: left; font-size: 20px; color: black;">${response.kategori}</div>
                 </div>
                 <div class="row" style="margin-bottom: 7px;">
                   <div class="col-lg-3 col-md-4 label" style="text-align: left; font-size: 20px;">Status</div>

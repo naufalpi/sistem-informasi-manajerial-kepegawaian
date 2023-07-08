@@ -32,8 +32,9 @@
                   <th scope="col" data-sortable="false" class="text-center">No</th>
                   <th scope="col"  data-sortable="false" class="tengah">Nama</th>
                   <th scope="col" class="hide-on-mobile">Jabatan</th>
-                  <th scope="col">Tanggal Mulai</th>
-                  <th scope="col">Tanggal Selesai</th>
+                  <th scope="col" data-sortable="false">Tanggal Mulai</th>
+                  <th scope="col" data-sortable="false">Tanggal Selesai</th>
+                  <th scope="col" data-sortable="false" class="text-center">Total Hari</th>
                   <th scope="col" data-sortable="false">Jenis Cuti</th>
                   <th scope="col" data-sortable="false">Alasan</th>
                   <th scope="col" class="text-center" data-sortable="false">Aksi</th>
@@ -47,6 +48,7 @@
                     <td class="hide-on-mobile">{{ $cuti->user && $cuti->user->jabatan ? $cuti->user->jabatan->name : 'N/A' }}</td>
                     <td>{{ $cuti->tgl_mulai }}</td>
                     <td>{{ $cuti->tgl_selesai }}</td>
+                    <td class="text-center">{{ $cuti->total_hari }}</td>
                     <td>{{ $cuti->jenis_cuti }}</td>
                     <td>{{ $cuti->alasan }}</td>
                     <td class="text-center">

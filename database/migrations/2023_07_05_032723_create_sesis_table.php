@@ -13,15 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('presensis', function (Blueprint $table) {
+        Schema::create('sesis', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
-            $table->foreignId('sesi_id');
-            $table->date('tanggal');
-            $table->time('waktu_masuk');
-            $table->boolean('status');
-            $table->time('waktu_keluar')->nullable();
-            $table->timestamps();
+            $table->string('code');
+            $table->dateTime('expire_at');
+            
         });
     }
 
@@ -32,6 +28,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('presensis');
+        Schema::dropIfExists('sesis');
+        
     }
 };

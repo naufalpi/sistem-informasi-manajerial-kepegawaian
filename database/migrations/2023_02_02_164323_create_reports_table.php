@@ -19,6 +19,7 @@ return new class extends Migration
             $table->date('tanggal');
             $table->string('kegiatan');
             $table->string('slug')->unique();
+            $table->string('kategori');
             $table->time('durasi');
             $table->string('status');
             $table->string('lokasi');

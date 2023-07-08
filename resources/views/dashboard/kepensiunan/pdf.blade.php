@@ -99,8 +99,8 @@
     </div>
     <br>
     <div class="content" style="text-align: justify;">
-        <p>Bersama ini kami sampaikan dengan hormat, bahwa berdasarkan Peraturan Menteri Dalam Negeri Nomor 83 Tahun 2015 tentang Pengangkatan dan Pemberhentian Perangkat Desa sebagaiamana telah diubah dengan Peraturan Menteri Dalam Negeri Nomor 67 Tahun 2017 tentang Perubahan atas Peraturan Menteri Dalam Negeri Nomor 83 Tahun 2015 tentang Pengangkatan dan Pemberhentian Perangkat Desa.</p><br>
-        <p>Karena Saudara/i {{ $kepensiunan->perangkat_desa }} menjadi {{ $kepensiunan->jabatan }} sebagaimana Keputusan Kepala Desa Wanakarsa Nomor {{ $kepensiunan->nomor_kkd }} tertanggal {{ $kepensiunan->tanggal_kkd_formatted }} telah {{ $kepensiunan->penyebab }}, maka dengan ini mohon kepada Saudara Camat Wanadadi untuk memberikan rekomendasi untuk pemberhentiannya dari Perangkat Desa dalam jabatan {{ $kepensiunan->jabatan }}.</p><br>
+        <p>Bersama ini kami sampaikan dengan hormat, bahwa berdasarkan Peraturan Menteri Dalam Negeri Nomor 83 Tahun 2015 tentang Pengangkatan dan Pemberhentian Perangkat Desa sebagaimana telah diubah dengan Peraturan Menteri Dalam Negeri Nomor 67 Tahun 2017 tentang Perubahan atas Peraturan Menteri Dalam Negeri Nomor 83 Tahun 2015 tentang Pengangkatan dan Pemberhentian Perangkat Desa.</p><br>
+        <p>Karena Saudara/i {{ $kepensiunan->perangkat_desa }} menjadi {{ $kepensiunan->jabatan }} sebagaimana Keputusan Kepala Desa Wanakarsa Nomor {{ $kepensiunan->nomor_kkd }} tertanggal {{ $kepensiunan->tanggal_kkd_formatted }} telah {{ $kepensiunan->penyebab }}, maka dengan ini mohon kepada Saudara Camat Wanadadi untuk memberikan rekomendasi untuk pemberhentiannya dari Perangkat Desa Wanakarsa dalam jabatan {{ $kepensiunan->jabatan }}.</p><br>
         
         <p>Sebagai pendukungnya, bersama ini disampaikan: </p>
         <article class="my-3">

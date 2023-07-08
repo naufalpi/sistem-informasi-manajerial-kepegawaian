@@ -25,7 +25,7 @@ class DashboardReportController extends Controller
 
         return view('dashboard.reports.index', [
             'reports' => Report::where('user_id', auth()->user()->id)
-                ->latest()
+                ->orderBy('tanggal', 'desc')
                 ->get()
                 ->map(function ($report) {
                     $report->tanggal = Carbon::parse($report->tanggal)->translatedFormat('d F Y');
@@ -57,6 +57,7 @@ class DashboardReportController extends Controller
         $validatedData = $request->validate([
             'kegiatan' => 'required|max:255',
             'slug' => 'required|unique:reports',
+            'kategori' => 'required|max:255',
             'tanggal' => 'required',
             'durasi' => 'required',
             'status' => 'required',
@@ -102,6 +103,7 @@ class DashboardReportController extends Controller
         $data = [
             'tanggal' => $formattedTanggal,
             'kegiatan' => $report->kegiatan,
+            'kategori' => $report->kategori,
             'status' => $report->status,
             'durasi' => $formattedDurasi,
             'lokasi' => $report->lokasi,
@@ -136,6 +138,7 @@ class DashboardReportController extends Controller
     {
         $rules = [
             'kegiatan' => 'required|max:255',
+            'kategori' => 'required|max:255',
             'tanggal' => 'required',
             'durasi' => 'required',
             'status' => 'required',

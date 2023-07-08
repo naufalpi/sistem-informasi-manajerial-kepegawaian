@@ -21,15 +21,23 @@ class DashboardLihatReportController extends Controller
     {
         $filter = $request->query('filter', 'today');
         $reports = $this->getFilteredReports($filter);
-        // Mengambil data jumlah report per bulan
+      
         $monthlyData = $this->getMonthlyData();
+        $categoryData = $this->getCategoryData();
         $employeeData = $this->getEmployeeData();
         $locationData = $this->getMostUsedLocationsData();
+        $categoryDurationData = $this->getCategoryDurationData();
+      
+
+        // Mengubah format tanggal pada laporan
+        foreach ($reports as $report) {
+            $report->tanggal = Carbon::parse($report->tanggal)->format('d-m-Y');
+        }
 
         // Mengambil data jumlah report berdasarkan status
         $statusData = $this->getStatusData();
         
-        return view('dashboard.lihat-reports.index', compact('reports', 'filter', 'monthlyData', 'statusData', 'employeeData', 'locationData'));
+        return view('dashboard.lihat-reports.index', compact('reports', 'filter', 'monthlyData', 'categoryData', 'statusData', 'employeeData', 'locationData', 'categoryDurationData'));
     }
     
     private function getFilteredReports($filter)
@@ -75,6 +83,77 @@ class DashboardLihatReportController extends Controller
             ->get();
     }
 
+    private function getCategoryData()
+    {
+        $categories = Report::select('kategori')
+                            ->groupBy('kategori')
+                            ->get();
+
+        $categoryData = [];
+
+        foreach ($categories as $category) {
+            $total = Report::where('kategori', $category->kategori)
+                           ->count();
+
+            $categoryData[] = [
+                'kategori' => $category->kategori,
+                'total' => $total,
+            ];
+        }
+
+        // Urutkan data kategori berdasarkan jumlah terkecil ke terbesar
+        usort($categoryData, function($a, $b) {
+            return $a['total'] <=> $b['total'];
+        });
+
+        $categories = [];
+        $data = [];
+
+        foreach ($categoryData as $dataItem) {
+            $categories[] = $dataItem['kategori'];
+            $data[] = $dataItem['total'];
+        }
+
+        return [
+            'categories' => $categories,
+            'data' => $data,
+        ];
+    }
+
+    private function getCategoryDurationData()
+    {
+        $categories = Report::select('kategori')
+            ->groupBy('kategori')
+            ->get();
+
+        $categoryData = [];
+        $durationData = [];
+
+        foreach ($categories as $category) {
+            $durations = Report::where('kategori', $category->kategori)
+                ->pluck('durasi')
+                ->toArray();
+
+            $totalDurationInSeconds = $this->calculateTotalDurationInSeconds($durations);
+                    // Konversi detik ke jam dan menit
+            $hours = floor($totalDurationInSeconds / 3600);
+            $minutes = floor(($totalDurationInSeconds % 3600) / 60);
+
+
+            $categoryData[] = $category->kategori;
+            $durationData[] = sprintf('%02d:%02d', $hours, $minutes); // Format: HH:MM
+        }
+
+        return [
+            'categories' => $categoryData,
+            'durations' => $durationData,
+        ];
+    }
+
+    
+    
+
+
     private function getStatusData()
     {
         return Report::select('status', DB::raw('COUNT(*) AS total'))
@@ -84,26 +163,29 @@ class DashboardLihatReportController extends Controller
 
     private function getEmployeeData()
     {
-        $employees = User::all();
-    
+        $employees = User::where('jabatan_id', '!=', '1')->get();
+
         $employeeData = [];
-    
+
         foreach ($employees as $employee) {
-            $durations = Report::where('user_id', $employee->id)->pluck('durasi')->toArray();
-    
-            // Fungsi untuk menghitung total durasi dalam detik
-            $totalDurationInSeconds = $this->calculateTotalDurationInSeconds($durations);
-            $numReports = count($durations);
-    
+            $reports = Report::where('user_id', $employee->id)
+                ->whereBetween('tanggal', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])
+                ->get();
+
+            $totalDurationInSeconds = $this->calculateTotalDurationInSeconds($reports->pluck('durasi')->toArray());
+            $numReports = $reports->count();
+
             $employeeData[] = [
                 'name' => $employee->name,
                 'total_duration' => $totalDurationInSeconds,
                 'num_reports' => $numReports
             ];
         }
-    
+
         return $employeeData;
     }
+
+
     
     private function calculateTotalDurationInSeconds($durations)
     {
@@ -172,31 +254,7 @@ class DashboardLihatReportController extends Controller
      * @param  \App\Models\Report  $report
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        // Ambil data yang sesuai dengan ID
-        Carbon::setLocale('id');
-        
-        $report = Report::find($id);
-        
-    
-        // Pastikan data ditemukan
-        if (!$report) {
-            return response()->json(['error' => 'Data tidak ditemukan'], 404);
-        }
-
-        $formattedTanggal = Carbon::parse($report->tanggal)->translatedFormat('d F Y');
-    
-        // Format data yang akan dikirimkan
-        $data = [
-            'tanggal' => $formattedTanggal,
-            'kegiatan' => $report->kegiatan,
-            'file' => asset('storage/' . $report->file),
-            'keterangan' => $report->keterangan
-        ];
-    
-        return response()->json($data);
-    }
+   
 
     /**
      * Show the form for editing the specified resource.

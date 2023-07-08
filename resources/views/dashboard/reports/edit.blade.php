@@ -31,6 +31,18 @@
                 @enderror
               </div>
               <div class="mb-3">
+                <label for="kategori" class="form-label">Kategori</label>
+                <select class="form-select @error('kategori') is-invalid @enderror" id="kategori" name="kategori" required>
+                    <option value="Administrasi" {{ $report->kategori == 'Administrasi' ? 'selected' : '' }}>Administrasi</option>
+                    <option value="Pelayanan Masyarakat" {{ $report->kategori == 'Pelayanan Masyarakat' ? 'selected' : '' }}>Pelayanan Masyarakat</option>
+                    <option value="Pengembangan Desa" {{ $report->kategori == 'Pengembangan Desa' ? 'selected' : '' }}>Pengembangan Desa</option>
+                    <option value="Koordinasi" {{ $report->kategori == 'Koordinasi' ? 'selected' : '' }}>Koordinasi</option>
+                    <option value="Pengawasan" {{ $report->kategori == 'Pengawasan' ? 'selected' : '' }}>Pengawasan</option>
+                    <option value="Komunikasi dan Informasi" {{ $report->kategori == 'Komunikasi dan Informasi' ? 'selected' : '' }}>Komunikasi dan Informasi</option>
+                    <option value="Pembinaan Masyarakat" {{ $report->kategori == 'Pembinaan Masyarakat' ? 'selected' : '' }}>Pembinaan Masyarakat</option>
+                </select>
+              </div>
+              <div class="mb-3">
                 <label for="tanggal" class="form-label">Tanggal</label>
                 <input type="date" class="form-control @error('tanggal') is-invalid @enderror" id="tanggal" name="tanggal" required value="{{ old('tanggal', $report->tanggal) }}">
                 @error('tanggal')
@@ -51,9 +63,9 @@
               <div class="mb-3">
                 <label for="status" class="form-label">Status</label>
                 <select class="form-select" name="status" required>
-                  <option value="Selesai" {{ old('status', $report->status) == 'Selesai' ? 'selected' : '' }}>Selesai</option>
-                  <option value="Sedang berlangsung" {{ old('status', $report->status) == 'Sedang berlangsung' ? 'selected' : '' }}>Sedang berlangsung</option>
-                  <option value="Tertunda" {{ old('status', $report->status) == 'Tertunda' ? 'selected' : '' }}>Tertunda</option>
+                  <option value="Selesai" {{ $report->status == 'Selesai' ? 'selected' : '' }}>Selesai</option>
+                  <option value="Sedang berlangsung" {{ $report->status == 'Sedang berlangsung' ? 'selected' : '' }}>Sedang berlangsung</option>
+                  <option value="Tertunda" {{ $report->status == 'Tertunda' ? 'selected' : '' }}>Tertunda</option>
                 </select>
                 @error('status')
                   <div class="invalid-feedback">
@@ -125,6 +137,6 @@
 @push('scripts')
     @php
         $pageTitle = 'Kelola Laporan Kerja';
-        $breadcrumbItem = 'Kelola Laporan Kerja';
+        $breadcrumbItem = 'Kelola Laporan Kerja / Ubah Laporan Kerja';
     @endphp
 @endpush

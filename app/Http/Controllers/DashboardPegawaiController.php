@@ -99,14 +99,18 @@ class DashboardPegawaiController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
+
     public function show($id)
     {
         $user = User::findOrFail($id);
-    
+        Carbon::setLocale('id');
+
+        $user->tgl_lahir = Carbon::parse($user->tgl_lahir)->translatedFormat('d F Y');
         return view('dashboard.pegawai.show', [
-            'user' => $user
+            'user' => $user,
         ]);
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -155,9 +159,20 @@ class DashboardPegawaiController extends Controller
             $validatedData['foto'] = $fotoPath;
         }
 
+
         // Update data pegawai
         $user = User::findOrFail($id);
+
+        // Periksa apakah ada perubahan password baru yang diinputkan
+        if ($request->filled('password')) {
+            $newPassword = $request->input('password');
+            $hashedPassword = Hash::make($newPassword);
+            $user->password = $hashedPassword;
+        }
+
         $user->update($validatedData);
+
+        
 
         return redirect('/dashboard/pegawai')->with('success', 'Data pegawai berhasil diubah.');
 

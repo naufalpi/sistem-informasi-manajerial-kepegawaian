@@ -24,7 +24,7 @@
       
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">Daftar Pengajuan Semua Cuti</h5>
+            <h5 class="card-title">Daftar Semua Pengajuan Cuti</h5>
             
             <table class="table table-borderless table-sm" id="tabelku">
               <thead>
@@ -108,11 +108,11 @@
                   <thead>
                       <tr class="table-primary" style="font-size: 13px;">
                           <th scope="col" data-sortable="false" class="text-center">No</th>
-                          <th scope="col" data-sortable="false" class="tengah">Nama</th>
+                          <th scope="col" data-sortable="false">Nama</th>
                           <th scope="col" class="hide-on-mobile">Jabatan</th>
-                          <th scope="col" data-sortable="false">Jumlah Pengajuan Cuti</th>
-                          <th scope="col" data-sortable="false">Pengajuan Diterima</th>
-                          <th scope="col" data-sortable="false">Pengajuan Ditolak</th>
+                          <th scope="col" data-sortable="false" class="text-center">Jumlah Pengajuan Cuti</th>
+                          <th scope="col" data-sortable="false" class="text-center">Pengajuan Diterima</th>
+                          <th scope="col" data-sortable="false" class="text-center">Pengajuan Ditolak</th>
                       </tr>
                   </thead>
                   <tbody>
@@ -124,9 +124,9 @@
                           <td class="text-center">{{ $loop->iteration }}</td>
                           <td onclick="showDataModal('{{ $firstCuti->user ? $firstCuti->user->name : 'N/A' }}', '{{ $firstCuti->user && $firstCuti->user->jabatan ? $firstCuti->user->jabatan->name : 'N/A' }}', {{ $cutiGroup->count() }}, {{ $cutiGroup->where('status', true)->count() }}, {{ $cutiGroup->where('status', false)->count() }})"><a href="#" class="text-dark" style="font-weight: bold;">{{ $firstCuti->user ? $firstCuti->user->name : 'N/A' }}</a></td>
                           <td class="hide-on-mobile">{{ $firstCuti->user && $firstCuti->user->jabatan ? $firstCuti->user->jabatan->name : 'N/A' }}</td>
-                          <td>{{ $cutiGroup->count() }}</td>
-                          <td>{{ $cutiGroup->where('status', true)->count() }}</td>
-                          <td>{{ $cutiGroup->where('status', false)->count() }}</td>
+                          <td class="text-center">{{ $cutiGroup->count() }}</td>
+                          <td class="text-center">{{ $cutiGroup->where('status', true)->count() }}</td>
+                          <td class="text-center">{{ $cutiGroup->where('status', false)->count() }}</td>
                       </tr>
                       @endforeach
                   </tbody>

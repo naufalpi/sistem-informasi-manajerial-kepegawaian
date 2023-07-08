@@ -19,8 +19,9 @@ class DashboardCutiPegawaiController extends Controller
         
         return view('dashboard.cuti.pegawai.index', [
             'cutis' => Cuti::where('user_id', auth()->user()->id)
-                ->latest()
+                ->orderBy('tgl_mulai', 'desc')
                 ->get()->map(function ($cuti) {
+                    $cuti->total_hari = Carbon::parse($cuti->tgl_selesai)->diffInDays($cuti->tgl_mulai) + 1;
                     $cuti->tgl_mulai = Carbon::parse($cuti->tgl_mulai)->translatedFormat('d F Y');
                     $cuti->tgl_selesai = Carbon::parse($cuti->tgl_selesai)->translatedFormat('d F Y');
                     return $cuti;
@@ -59,6 +60,14 @@ class DashboardCutiPegawaiController extends Controller
 
         return redirect('/dashboard/cuti/pegawai')->with('success', 'Pengajuan cuti berhasil dikirim!');
     }
+
+    public function destroy($id)
+    {
+        Cuti::destroy($id);
+
+        return redirect('/dashboard/cuti/pegawai')->with('success', 'Pengajuan cuti berhasil dihapus!');
+    }
+
 
     public function approve(Cuti $cuti)
     {

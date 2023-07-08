@@ -6,24 +6,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\LogOptions;
 
-class Presensi extends Model
+class Sesi extends Model
 {
     use HasFactory;
-
     protected $guarded = ['id'];
-    protected $with = ['user'];
 
-
-    public function user()
+    public function presensi()
     {
-        return $this->belongsTo(User::class);
+        return $this->hasMany(Presensi::class);
     }
-
-    public function sesi()
-    {
-        return $this->belongsTo(Sesi::class);
-    }
-
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()

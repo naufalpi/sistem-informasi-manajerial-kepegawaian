@@ -20,7 +20,7 @@ class DashboardPenilaianController extends Controller
 
 
         return view('dashboard.penilaian.index', [
-            'penilaians' => Penilaian::latest()
+            'penilaians' => Penilaian::orderBy('tanggal', 'desc')
                 ->get()
                 ->map(function ($penilaian) {
                     $penilaian->tanggal = Carbon::parse($penilaian->tanggal)->translatedFormat('d F Y');
@@ -51,18 +51,26 @@ class DashboardPenilaianController extends Controller
             'title' => 'required|max:255',
             'semester' => 'required|max:255',
             'tanggal' => 'required|max:255',
-            'file' => 'file|max:7168|mimes:pdf'
+            'file' => 'required|file|max:7168|mimes:pdf'
         ]);
+    
+        $title = $validatedData['title'];
+        $semester = $validatedData['semester'];
+        $tanggal = $validatedData['tanggal'];
 
+        $newTitle = $title . ' Semester ' . $semester . ' Tahun ' . Carbon::parse($tanggal)->format('Y');
+        $validatedData['title'] = $newTitle;
 
-        if($request->file('file')) {
+    
+        if ($request->file('file')) {
             $validatedData['file'] = $request->file('file')->store('penilaian-file');
         }
-
-       Penilaian::create($validatedData);
-
+    
+        Penilaian::create($validatedData);
+    
         return redirect('/dashboard/penilaian')->with('success', 'Laporan penilaian kinerja berhasil ditambahkan!');
     }
+    
 
     /**
      * Display the specified resource.
@@ -106,19 +114,25 @@ class DashboardPenilaianController extends Controller
 
         $validatedData = $request->validate($rules);
 
-        if($request->file('file')) {
-            if($request->oldFile) {
+        $title = $validatedData['title'];
+        $semester = $validatedData['semester'];
+        $tanggal = $validatedData['tanggal'];
+
+        $newTitle = $title . ' Semester ' . $semester . ' Tahun ' . Carbon::parse($tanggal)->format('Y');
+        $validatedData['title'] = $newTitle;
+
+        if ($request->file('file')) {
+            if ($request->oldFile) {
                 Storage::delete($request->oldFile);
             }
             $validatedData['file'] = $request->file('file')->store('penilaian-file');
         }
- 
 
-        Penilaian::where('id', $penilaian->id)
-            ->update($validatedData);
+        $penilaian->update($validatedData);
 
         return redirect('/dashboard/penilaian')->with('success', 'Laporan penilaian kinerja berhasil diubah!');
     }
+
 
     /**
      * Remove the specified resource from storage.

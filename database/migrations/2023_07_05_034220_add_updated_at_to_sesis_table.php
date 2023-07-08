@@ -13,14 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('presensis', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id');
-            $table->foreignId('sesi_id');
-            $table->date('tanggal');
-            $table->time('waktu_masuk');
-            $table->boolean('status');
-            $table->time('waktu_keluar')->nullable();
+        Schema::table('sesis', function (Blueprint $table) {
             $table->timestamps();
         });
     }
@@ -32,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('presensis');
+        Schema::table('sesis', function (Blueprint $table) {
+            $table->timestamps();
+        });
     }
 };

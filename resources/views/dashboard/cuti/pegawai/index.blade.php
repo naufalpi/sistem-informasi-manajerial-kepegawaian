@@ -5,7 +5,7 @@
 
 <section class="section">
     <div class="row">
-      <div class="col-lg-12">
+      <div class="col-lg-10">
         @if(session()->has('success'))
           <script>
             document.addEventListener('DOMContentLoaded', function() {
@@ -34,9 +34,11 @@
                   <th scope="col" data-sortable="false" class="text-center">No</th>
                   <th scope="col" data-sortable="false">Tanggal Mulai</th>
                   <th scope="col" data-sortable="false">Tanggal Selesai</th>
+                  <th class="text-center" scope="col" data-sortable="false">Total Hari</th>
                   <th scope="col">Jenis</th>
                   <th scope="col" data-sortable="false">Alasan</th>
                   <th scope="col" >Status</th>
+                  <th scope="col" data-sortable="false">Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -45,6 +47,7 @@
                     <td class="text-center">{{ $loop->iteration }}</td>
                     <td>{{ $cuti->tgl_mulai }}</td>
                     <td>{{ $cuti->tgl_selesai }}</td>
+                    <td class="text-center">{{ $cuti->total_hari }}</td>
                     <td>{{ $cuti->jenis_cuti }}</td>
                     <td>{{ $cuti->alasan }}</td>
                     <td>
@@ -55,6 +58,13 @@
                       @else
                           <span>Ditolak</span>
                       @endif
+                    </td>
+                    <td  class="text-center">
+                      <form action="/dashboard/cuti/pegawai/{{ $cuti->id }}" method="post" class="d-inline" id="delete-form-{{ $cuti->id }}">
+                        @method('delete')
+                        @csrf
+                        <button class="badge bg-danger border-0 text-dark" onclick="confirmDelete(event, '{{ $cuti->id }}')" title="Hapus"><i class="bi bi-x-circle"></i></button>
+                      </form>
                     </td>
                   </tr>
                 @endforeach
@@ -78,12 +88,33 @@
         perPage: 5
       });
     });
+
+    function confirmDelete(event, id) {
+      event.preventDefault(); // Hentikan pengiriman form default
+
+      // Tampilkan konfirmasi SweetAlert
+      Swal.fire({
+        title: 'Apakah Anda yakin?',
+        text: "Anda akan menghapus pengajuan cuti ini!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Ya, hapus!',
+        cancelButtonText: 'Batal'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // Jika pengguna mengklik "Ya, hapus", kirimkan form
+          document.getElementById('delete-form-' + id).submit();
+        }
+      });
+    }
   </script>
 @endsection
 
 @push('scripts')
     @php
-        $pageTitle = 'Cuti Pegawai';
-        $breadcrumbItem = 'Cuti Pegawai';
+        $pageTitle = 'Kelola Cuti';
+        $breadcrumbItem = 'Kelola Cuti';
     @endphp
 @endpush

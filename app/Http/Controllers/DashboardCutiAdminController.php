@@ -21,8 +21,9 @@ class DashboardCutiAdminController extends Controller
 
         return view('dashboard.cuti.admin.index', [
             'cutis' => Cuti::with('user')
-                ->latest()
+                ->orderBy('tgl_mulai', 'desc')
                 ->get()->map(function ($cuti) {
+                    $cuti->total_hari = Carbon::parse($cuti->tgl_selesai)->diffInDays($cuti->tgl_mulai) + 1;
                     $cuti->tgl_mulai = Carbon::parse($cuti->tgl_mulai)->translatedFormat('d F Y');
                     $cuti->tgl_selesai = Carbon::parse($cuti->tgl_selesai)->translatedFormat('d F Y');
                     return $cuti;
