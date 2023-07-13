@@ -27,6 +27,8 @@ class DashboardLihatReportController extends Controller
         $employeeData = $this->getEmployeeData();
         $locationData = $this->getMostUsedLocationsData();
         $categoryDurationData = $this->getCategoryDurationData();
+
+    
       
 
         // Mengubah format tanggal pada laporan
@@ -127,7 +129,7 @@ class DashboardLihatReportController extends Controller
             ->get();
 
         $categoryData = [];
-        $durationData = [];
+        $averageDurationData = [];
 
         foreach ($categories as $category) {
             $durations = Report::where('kategori', $category->kategori)
@@ -135,20 +137,26 @@ class DashboardLihatReportController extends Controller
                 ->toArray();
 
             $totalDurationInSeconds = $this->calculateTotalDurationInSeconds($durations);
-                    // Konversi detik ke jam dan menit
-            $hours = floor($totalDurationInSeconds / 3600);
-            $minutes = floor(($totalDurationInSeconds % 3600) / 60);
+            $totalReports = count($durations);
+            
+            if ($totalReports > 0) {
+                $averageDurationInSeconds = $totalDurationInSeconds / $totalReports;
+              
 
+                // Mengonversi ke format 'Jam Menit'
+            
 
-            $categoryData[] = $category->kategori;
-            $durationData[] = sprintf('%02d:%02d', $hours, $minutes); // Format: HH:MM
+                $categoryData[] = $category->kategori;
+                $averageDurationData[] =  $averageDurationInSeconds;
+            }
         }
 
         return [
             'categories' => $categoryData,
-            'durations' => $durationData,
+            'average_durations' => $averageDurationData,
         ];
     }
+
 
     
     

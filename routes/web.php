@@ -38,7 +38,7 @@ use App\Http\Controllers\DashboardLihatPresensiController;
 
 Route::get('/', function () {
     if (Auth::check()) {
-        return redirect('/dashboard*');
+        return redirect('/dashboard');
     }
 
     return view('login.index', [
@@ -54,8 +54,6 @@ Route::get('/login', [LoginController::class, 'index'])->name('login')->middlewa
 Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout']);
 
-Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
-Route::post('/register', [RegisterController::class, 'store']);
 
 
 Route::middleware(['auth'])->group(function () {

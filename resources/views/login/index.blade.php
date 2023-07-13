@@ -4,7 +4,7 @@
 
 <section class="section register min-vh-100 d-flex flex-column align-items-center">
     <div class="container mt-3">
-      <p class="text-center pb-0 display-4 welcome-title" style="color: white; font-weight: bold; text-shadow: 2px 2px 4px #000">SELAMAT DATANG DI SISTEM INFORMASI MANAJERIAL KEPEGAWAIAN KANTOR DESA WANAKARSA</p>
+      <p class="text-center pb-0 display-4 welcome-title" style="color: white; font-weight: bold; text-shadow: 2px 2px 4px #000">SELAMAT DATANG DI SISTEM INFORMASI KEPEGAWAIAN KANTOR DESA WANAKARSA</p>
     </div>
 
   <div class="container-fluid mt-5">

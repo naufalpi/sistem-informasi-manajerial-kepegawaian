@@ -148,48 +148,56 @@
         <div class="col-lg-6">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Durasi Laporan Kerja per Kategori</h5>
+              <h5 class="card-title">Rata-rata Durasi Laporan Kerja per Kategori</h5>
         
               <!-- Bar Chart -->
               <div id="barC"></div>
         
               <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                  const labels = @json($categoryDurationData['categories']);
-                  const data = @json($categoryDurationData['durations']);
-              
-                  new ApexCharts(document.querySelector("#barC"), {
+              document.addEventListener("DOMContentLoaded", () => {
+                const labels = @json($categoryDurationData['categories']);
+                const data = @json($categoryDurationData['average_durations']);
+
+                new ApexCharts(document.querySelector("#barC"), {
                     series: [{
-                      data: data
+                        data: data
                     }],
                     chart: {
-                      type: 'bar',
-                      height: 350
+                        type: 'bar',
+                        height: 350
                     },
                     plotOptions: {
-                      bar: {
-                        borderRadius: 4,
-                        horizontal: true,
-                      }
+                        bar: {
+                            borderRadius: 4,
+                            horizontal: true,
+                        }
                     },
                     dataLabels: {
-                      enabled: false
+                        enabled: false
                     },
                     xaxis: {
-                      categories: labels,
+                        categories: labels,
+                        labels: {
+                            formatter: function(value) {
+                              const hours = Math.floor(value / 3600);
+                              return value;
+                            }
+                        }
                     },
                     tooltip: {
-                      y: {
-                        formatter: function(value) {
-                          const minutes = value % 60; // Mendapatkan menit
-              
-                          return value + ' Jam ' + minutes + ' Menit';
+                        y: {
+                            formatter: function(value) {
+                                const hours = Math.floor(value / 3600);
+                                const minutes = Math.floor((value % 3600) / 60);
+                                return hours + ' Jam ' + minutes + ' Menit';
+                            }
                         }
-                      }
                     }
-                  }).render();
-                });
-              </script>
+                }).render();
+              });
+            
+
+            </script>
               
               <!-- End Bar Chart -->
         
