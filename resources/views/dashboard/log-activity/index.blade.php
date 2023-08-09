@@ -18,7 +18,7 @@
                     <table class="table table-sm" id="tabelku">
                       <thead>
                         <tr>
-                          <th scope="col">No</th>
+                          <th scope="col" data-sortable="false">No</th>
                           <th scope="col">User</th>
                           <th scope="col" data-sortable="false">Event</th>
                           <th scope="col" data-sortable="false">Before</th>

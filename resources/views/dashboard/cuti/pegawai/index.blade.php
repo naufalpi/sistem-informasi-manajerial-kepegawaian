@@ -5,7 +5,7 @@
 
 <section class="section">
     <div class="row">
-      <div class="col-lg-10">
+      <div class="col-lg-12">
         @if(session()->has('success'))
           <script>
             document.addEventListener('DOMContentLoaded', function() {
@@ -30,8 +30,9 @@
       
             <table class="table table-borderless table-sm" id="tabelku">
               <thead>
-                <tr class="table-primary" style="font-size: 13px">
+                <tr style="font-size: 13px">
                   <th scope="col" data-sortable="false" class="text-center">No</th>
+                  <th scope="col" data-sortable="false">Tanggal Pengajuan</th>
                   <th scope="col" data-sortable="false">Tanggal Mulai</th>
                   <th scope="col" data-sortable="false">Tanggal Selesai</th>
                   <th class="text-center" scope="col" data-sortable="false">Total Hari</th>
@@ -45,6 +46,7 @@
                 @foreach ($cutis as $cuti)
                   <tr style="font-size: 13px">
                     <td class="text-center">{{ $loop->iteration }}</td>
+                    <td>{{ $cuti->created_at }}</td>
                     <td>{{ $cuti->tgl_mulai }}</td>
                     <td>{{ $cuti->tgl_selesai }}</td>
                     <td class="text-center">{{ $cuti->total_hari }}</td>
@@ -52,11 +54,12 @@
                     <td>{{ $cuti->alasan }}</td>
                     <td>
                       @if (is_null($cuti->status))
-                          <span>Dalam Proses</span>
+                          <span class="text-primary">Dalam Proses</span>
                       @elseif ($cuti->status)
-                          <span>Disetujui</span>
+                          <span class="text-success">Disetujui</span>
                       @else
-                          <span>Ditolak</span>
+                          <span class="text-danger">Ditolak / </span>
+                          <span><a href="#" class="view-rejection-reason" data-reason="{{ $cuti->pesan }}">Lihat Pesan</a></span>
                       @endif
                     </td>
                     <td  class="text-center">
@@ -82,11 +85,34 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      new simpleDatatables.DataTable("#tabelku", {
-        searchable: false,
-        perPageSelect: false,
-        perPage: 5
+
+
+      
+
+
+     
+
+      // Tombol "Lihat Pesan" untuk penolakan
+      const viewRejectionButtons = document.querySelectorAll('.view-rejection-reason');
+      viewRejectionButtons.forEach(button => {
+          button.addEventListener('click', function() {
+              const rejectionReason = button.getAttribute('data-reason');
+              Swal.fire({
+                  title: 'Alasan Penolakan',
+                  text: rejectionReason,
+                  icon: 'info',
+                  confirmButtonText: 'Tutup'
+              });
+          });
       });
+
+      // Inisialisasi DataTables
+      const table = $('#tabelku').DataTable({
+            lengthMenu: [[5, 10, 25, -1], [5, 10, 25, "All"]],
+            pageLength: 5,
+    
+        });
+      
     });
 
     function confirmDelete(event, id) {

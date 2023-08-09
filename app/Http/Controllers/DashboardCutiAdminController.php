@@ -105,9 +105,12 @@ class DashboardCutiAdminController extends Controller
         return redirect('/dashboard/cuti/admin')->with('success', 'Pengajuan cuti berhasil disetujui');
     }
 
-    public function reject(Cuti $cuti)
+    public function reject(Request $request, Cuti $cuti)
     {
-        $cuti->update(['status' => false]);
+        $cuti->update([
+            'status' => false,
+            'pesan' => $request->input('pesan') // Ambil pesan dari form
+        ]);
 
         return redirect('/dashboard/cuti/admin')->with('success', 'Pengajuan cuti berhasil ditolak');
     }

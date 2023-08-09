@@ -12,6 +12,8 @@
     <link href="/image/logo.png" rel="icon">
     <link href="/image/apple-touch-icon.png" rel="apple-touch-icon">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -38,6 +40,8 @@
 
     <!-- Cropper -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.11/cropper.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
   
 
     <style>
@@ -87,6 +91,27 @@
         text-align: center;
       }
 
+      .custom-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      overflow: hidden;
+      }
+      .custom-icon div {
+        width: 100%;
+        height: 100%;
+      }
+
+
+      #map {
+        height: 500px;
+      }
+  
+      .keterangan {
+        padding: 10px;
+        background-color: #f9f9f9;
+        border: 1px solid #ccc;
+      }
     </style>
 
 
@@ -133,6 +158,9 @@
     <script src="/js/dashboard/tinymce/tinymce.min.js"></script>
     <script src="/js/dashboard/php-email-form/validate.js"></script>
     <script src="/js/dashboard/main.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 
 
     

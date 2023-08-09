@@ -23,7 +23,7 @@ class DashboardPenilaianController extends Controller
             'penilaians' => Penilaian::orderBy('tanggal', 'desc')
                 ->get()
                 ->map(function ($penilaian) {
-                    $penilaian->tanggal = Carbon::parse($penilaian->tanggal)->translatedFormat('d F Y');
+                    $penilaian->tanggal = Carbon::parse($penilaian->tanggal)->translatedFormat('F Y');
                     return $penilaian;
                 }),
         ]);

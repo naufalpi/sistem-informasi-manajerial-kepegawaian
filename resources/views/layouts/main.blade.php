@@ -19,6 +19,8 @@
   <link href="/css/dashboard/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="/css/dashboard/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
 
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
+
   <!-- Template Main CSS File -->
   <link href="/css/style.css" rel="stylesheet">
 

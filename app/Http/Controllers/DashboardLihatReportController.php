@@ -36,6 +36,8 @@ class DashboardLihatReportController extends Controller
             $report->tanggal = Carbon::parse($report->tanggal)->format('d-m-Y');
         }
 
+    
+
         // Mengambil data jumlah report berdasarkan status
         $statusData = $this->getStatusData();
         
@@ -217,15 +219,22 @@ class DashboardLihatReportController extends Controller
 
         $locationData = [];
 
-        foreach ($locations as $location) {
+        $iconColors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff', '#800080', '#ffa500', '#008000', '#ff69b4', '#000000'];
+
+        foreach ($locations as $key => $location) {
+            // Gantikan 'latitude' dan 'longitude' dengan nilai koordinat lokasi sesuai dengan database Anda
+         
+
             $locationData[] = [
-            'label' => $location->lokasi,
-            'usage_count' => $location->usage_count,
+                'label' => $location->lokasi,
+                'usage_count' => $location->usage_count,
+                'iconColor' => $iconColors[$key % count($iconColors)]
             ];
         }
 
         return $locationData;
     }
+
 
 
 

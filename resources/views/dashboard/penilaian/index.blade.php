@@ -34,7 +34,7 @@
                 <th class="text-center" scope="col" data-sortable="false">No.</th>
                 <th scope="col" data-sortable="false">Judul</th>
                 <th class="text-center" scope="col" data-sortable="false">Semester</th>
-                <th scope="col">Tanggal</th>
+                <th scope="col">Bulan</th>
                 <th scope="col" class="text-center" data-sortable="false">File</th>
                 <th scope="col" class="text-center" data-sortable="false">Action</th>
               </tr>

@@ -364,7 +364,42 @@
           </div>
         </div>
 
-        <div class="col-lg-6">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Status Laporan</h5>
+
+              <!-- Pie Chart -->
+              <canvas id="pieChart" style="max-height: 265px;"></canvas>
+              <script>
+                document.addEventListener("DOMContentLoaded", () => {
+                    const statusData = @json($statusData); // Menyimpan data dari controller ke variabel JavaScript
+            
+                    const labels = statusData.map(data => data.status);
+                    const data = statusData.map(data => data.total);
+                    const backgroundColor = ['rgb(255, 205, 86)', 'rgb(54, 162, 235)', 'rgb(255, 99, 132)'];
+            
+                    new Chart(document.querySelector('#pieChart'), {
+                        type: 'pie',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: 'Jumlah Laporan',
+                                data: data,
+                                backgroundColor: backgroundColor,
+                                hoverOffset: 4
+                            }]
+                        }
+                    });
+                });
+              </script>
+              <!-- End Pie CHart -->
+
+            </div>
+          </div>
+        </div>
+
+        {{-- <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Lokasi Paling Sering Digunakan</h5>
@@ -421,42 +456,136 @@
               </script>
             </div>
           </div>
-        </div>
-        
-        <div class="col-lg-6">
+        </div> --}}
+
+
+        <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Status Laporan</h5>
-
-              <!-- Pie Chart -->
-              <canvas id="pieChart" style="max-height: 265px;"></canvas>
-              <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                    const statusData = @json($statusData); // Menyimpan data dari controller ke variabel JavaScript
+              <h5 class="card-title">Persebaran Lokai Laporan Kerja Pegawai</h5>
+              <div id="map" style="height: 500px;"></div>
+              <div class="keterangan">
+                <h3>Keterangan</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <ul>
+                            @foreach($locationData as $data)
+                                @if($data['label'] === 'RT 07/RW 01')
+                                    <li><span style="background-color: #ff0000; display: inline-block; width: 12px; height: 12px;"></span> RT 07/RW 01 = {{ $data['usage_count'] }}</li>
+                                @elseif($data['label'] === 'RT 06/RW 01')
+                                    <li><span style="background-color: #00ff00; display: inline-block; width: 12px; height: 12px;"></span> RT 06/RW 01 = {{ $data['usage_count'] }}</li>
+                                @elseif($data['label'] === 'RT 05/RW 01')
+                                    <li><span style="background-color: #0000ff; display: inline-block; width: 12px; height: 12px;"></span> RT 05/RW 01 = {{ $data['usage_count'] }}</li>
+                                @elseif($data['label'] === 'RT 01/RW 01')
+                                    <li><span style="background-color: #ffff00; display: inline-block; width: 12px; height: 12px;"></span> RT 01/RW 01 = {{ $data['usage_count'] }}</li>
+                                @elseif($data['label'] === 'RT 02/RW 01')
+                                    <li><span style="background-color: #ff00ff; display: inline-block; width: 12px; height: 12px;"></span> RT 02/RW 01 = {{ $data['usage_count'] }}</li>
+                                @elseif($data['label'] === 'RT 04/RW 01')
+                                    <li><span style="background-color: #00ffff; display: inline-block; width: 12px; height: 12px;"></span> RT 04/RW 01 = {{ $data['usage_count'] }}</li>
+                                @endif
+                            @endforeach
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <ul>
+                            @foreach($locationData as $data)
+                                @if($data['label'] === 'RT 03/RW 01')
+                                    <li><span style="background-color: #800080; display: inline-block; width: 12px; height: 12px;"></span> RT 03/RW 01 = {{ $data['usage_count'] }}</li>
+                                @elseif($data['label'] === 'RT 03/RW 02')
+                                    <li><span style="background-color: #ffa500; display: inline-block; width: 12px; height: 12px;"></span> RT 03/RW 02 = {{ $data['usage_count'] }}</li>
+                                @elseif($data['label'] === 'Rawawindu')
+                                    <li><span style="background-color: #008000; display: inline-block; width: 12px; height: 12px;"></span> Rawawindu = {{ $data['usage_count'] }}</li>
+                                @elseif($data['label'] === 'Kantor Desa')
+                                    <li><span style="background-color: #ff69b4; display: inline-block; width: 12px; height: 12px;"></span> Kantor Desa = {{ $data['usage_count'] }}</li>
+                                @elseif($data['label'] === 'Kecamatan')
+                                    <li><span style="background-color: #000000; display: inline-block; width: 12px; height: 12px;"></span> Kecamatan = {{ $data['usage_count'] }}</li>
+                                @endif
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+              </div>
             
-                    const labels = statusData.map(data => data.status);
-                    const data = statusData.map(data => data.total);
-                    const backgroundColor = ['rgb(255, 205, 86)', 'rgb(54, 162, 235)', 'rgb(255, 99, 132)'];
-            
-                    new Chart(document.querySelector('#pieChart'), {
-                        type: 'pie',
-                        data: {
-                            labels: labels,
-                            datasets: [{
-                                label: 'Jumlah Laporan',
-                                data: data,
-                                backgroundColor: backgroundColor,
-                                hoverOffset: 4
-                            }]
-                        }
-                    });
-                });
-              </script>
-              <!-- End Pie CHart -->
-
             </div>
           </div>
         </div>
+        <script>
+          document.addEventListener('DOMContentLoaded', function () {
+            // Data lokasi RT di desa Wanakarsa (contoh)
+            const rtData = [
+              { rt: 'RT 07/RW 01', lat: -7.366665, lng: 109.629395, iconColor: '#ff0000' },
+              { rt: 'RT 06/RW 01', lat: -7.366119, lng: 109.630947, iconColor: '#00ff00' },
+              { rt: 'RT 05/RW 01', lat: -7.365736, lng: 109.632807, iconColor: '#0000ff' },
+              { rt: 'RT 01/RW 01', lat: -7.368612, lng: 109.628932, iconColor: '#ffff00' },
+              { rt: 'RT 02/RW 01', lat: -7.368506, lng: 109.631122, iconColor: '#ff00ff' },
+              { rt: 'RT 04/RW 01', lat: -7.366994, lng: 109.633478, iconColor: '#00ffff' },
+              { rt: 'RT 03/RW 01', lat: -7.368944, lng: 109.633031, iconColor: '#800080' },
+              { rt: 'RT 03/RW 02', lat: -7.373123, lng: 109.633890, iconColor: '#ffa500' },
+              { rt: 'Rawawindu', lat: -7.377557, lng: 109.635886, iconColor: '#008000' },
+              { rt: 'Kantor Desa', lat: -7.366381921317957, lng: 109.6339661602891, iconColor: '#ff69b4' },
+              { rt: 'Kecamatan', lat: -7.367376584772909,  lng: 109.6301876282293, iconColor: '#000000' },
+              // Tambahkan data RT lainnya...
+            ];
+
+            // Data koordinat batas-batas desa Wanakarsa (contoh)
+            const desaWanakarsaCoords = [
+              [-7.372037, 109.629021],
+              [-7.371632, 109.629308],
+              [-7.371283, 109.629344],
+              [-7.369827, 109.629142],
+              [-7.368130, 109.627919],
+              [-7.367925, 109.628208],
+              [-7.365445, 109.628617],
+              [-7.363285, 109.636132],
+              [-7.363875, 109.639140],
+              [-7.380820, 109.638921],
+              [-7.383416, 109.633128],
+              [-7.377798, 109.625188],
+            
+              // Tambahkan koordinat lainnya hingga membentuk poligon tertutup...
+            ];
+      
+            // Hitung koordinat tengah desa Wanakarsa
+            const centerLat = -7.367322; // Ganti dengan latitude koordinat tengah desa Wanakarsa
+            const centerLng = 109.634171; // Ganti dengan longitude koordinat tengah desa Wanakarsa
+      
+            // Inisialisasi peta dan set tampilan awal
+            const map = L.map('map').fitBounds(desaWanakarsaCoords);
+
+            // Tambahkan layer OpenStreetMap
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+            // Tambahkan poligon untuk batas desa Wanakarsa
+            const desaWanakarsaPolygon = L.polygon(desaWanakarsaCoords, {
+              color: 'red', // Ganti dengan warna garis yang diinginkan
+              weight: 1,    // Ganti dengan ketebalan garis yang diinginkan (dalam piksel)
+              fillColor: 'transparent', // Ganti dengan warna poligon yang diinginkan
+              fillOpacity: 0.5,  // Ganti dengan tingkat transparansi poligon (0 - 1)
+            }).addTo(map);
+
+            function getCustomIcon(iconColor) {
+              return L.divIcon({
+                className: 'custom-icon',
+                html: `<div style="background-color: ${iconColor};"></div>`,
+                iconSize: [10, 10], // Atur ukuran ikon sesuai keinginan
+                iconAnchor: [10, 10], // Atur anchor ikon (posisi tengah) sesuai keinginan
+              });
+            }
+
+            // Tambahkan marker dan popup untuk setiap RT
+            rtData.forEach(rt => {
+              const marker = L.marker([rt.lat, rt.lng], { icon: getCustomIcon(rt.iconColor) }).addTo(map);
+              marker.bindPopup(rt.rt);
+            });
+
+            
+          });
+        </script>
+
+          
+
+        
+        
 
        
         
@@ -477,6 +606,7 @@
 
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 
 <script>
   function showData(id) {
